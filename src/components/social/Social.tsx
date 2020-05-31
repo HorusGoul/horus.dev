@@ -80,17 +80,17 @@ function SocialItem({ href, icon, children, label }: SocialItemProps) {
     <li>
       <a
         href={href}
-        className={`
-          bg-white 
-          shadow-md 
-          p-4 
-          flex 
-          items-center 
-          text-gray-700 
-          transition-colors transition-shadow duration-200 ease-linear 
-          focus:text-black focus:shadow-lg 
-          hover:text-black hover:shadow-lg
-        `}
+        className={classNames(
+          'rounded-md',
+          'bg-white',
+          'shadow-md',
+          'p-4',
+          'flex items-center',
+          'text-gray-700',
+          'transition-colors transition-shadow duration-200 ease-linear',
+          'focus:text-black focus:shadow-lg',
+          'hover:text-black hover:shadow-lg',
+        )}
       >
         <span role="img" aria-label={label} className="pr-4 w-8 text-lg">
           {icon}

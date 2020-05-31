@@ -16,7 +16,7 @@ function Social({ className }: SocialProps) {
   return (
     <ul
       className={classNames(
-        'grid gap-4 md:gap-6 md:grid-cols-2 md:grid-rows-3',
+        'grid gap-4 md:gap-8 md:grid-cols-2 md:grid-rows-3',
         className,
       )}
     >
@@ -83,13 +83,13 @@ function SocialItem({ href, icon, children, label }: SocialItemProps) {
         className={classNames(
           'rounded-md',
           'bg-white',
-          'shadow-md',
+          'shadow-sm',
           'p-4',
           'flex items-center',
           'text-gray-700',
-          'transition-colors transition-shadow duration-200 ease-linear',
-          'focus:text-black focus:shadow-lg',
-          'hover:text-black hover:shadow-lg',
+          'transition-all duration-200 ease-linear',
+          'focus:text-black focus:shadow-lg md:focus:shadow-xl',
+          'hover:text-black hover:shadow-lg md:focus:shadow-xl',
         )}
       >
         <span role="img" aria-label={label} className="pr-4 w-8 text-lg">

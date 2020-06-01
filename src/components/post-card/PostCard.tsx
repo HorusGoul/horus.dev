@@ -21,7 +21,7 @@ function PostCard({ href, title, details }: PostCardProps) {
         {title}
       </h3>
 
-      <span className="block opacity-75 tracking-wide py-2 font-light text-md xsm:text-lg md:text-xl">
+      <span className="block opacity-75 tracking-wide pt-2 font-light text-md xsm:text-lg xsm:pt-4 md:pt-6 md:text-xl">
         {details}
       </span>
     </a>

@@ -61,7 +61,7 @@ export default function Home() {
           Latest articles
         </h2>
 
-        <div className="py-4 p grid -mx-6 gap-4 xsm:gap-8 xsm:mx-0 md:pt-6">
+        <div className="py-4 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0 md:pt-6">
           <PostCard
             href="https://dev.to/horusgoul/using-html-css-and-javascript-to-create-obs-plugins-for-your-live-streaming-sessions-45ij"
             title="Using HTML, CSS, and JavaScript to Create OBS Plugins for Your Live Streaming Sessions"

@@ -5,6 +5,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import classNames from 'classnames';
 import CodeTag from '@/components/code-tag';
 import { theme } from '@/../tailwind.config.js';
+import Container from '@/components/container';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         <title>Horus Lugo</title>
       </Head>
 
-      <div className="container mx-auto py-12 px-6 xsm:px-8 md:px-12 md:py-24 lg:py-32">
+      <Container>
         <div className="w-full md:flex md:items-center md:flex-row">
           <div className="inline-block text-left md:flex-1 md:block">
             <h2 className="font-medium text-3xl xsm:text-4xl md:text-6xl">
@@ -47,16 +48,16 @@ export default function Home() {
           <CodeTag>TypeScript</CodeTag>
         </p>
 
-        <div className="pt-12 md:pt-64">
-          <h3 className="font-bold font-mono text-gray-800 text-xl xsm:text-2xl ">
+        <div className="pt-16 md:pt-24">
+          <h3 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">
             Where to find me
           </h3>
 
-          <Social className="pt-4 max-w-2xl md:pt-6 " />
+          <Social className="pt-4 -mx-6 max-w-5xl sm:mx-0 md:pt-6" />
         </div>
-      </div>
+      </Container>
 
-      <div className="container mx-auto py-12 px-6 xsm:px-8 md:px-12 md:py-24 lg:py-32">
+      <Container>
         <h2 className="font-bold font-mono text-2xl xsm:text-3xl md:text-5xl">
           Latest articles
         </h2>
@@ -95,7 +96,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 }

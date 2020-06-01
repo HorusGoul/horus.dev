@@ -4,6 +4,7 @@ import PostCard from '@/components/post-card';
 import { BsArrowRight } from 'react-icons/bs';
 import classNames from 'classnames';
 import CodeTag from '@/components/code-tag';
+import { theme } from '@/../tailwind.config.js';
 
 export default function Home() {
   return (
@@ -24,7 +25,15 @@ export default function Home() {
           </div>
 
           <picture className="rounded-full overflow-hidden shadow-xl float-right w-20 xsm:w-32 md:float-none md:w-48 lg:w-64 ">
-            <img src="/images/avatar/avatar.jpg" alt="My Avatar" />
+            <source
+              media={`(min-width: ${theme.screens.lg})`}
+              srcSet="/images/avatar/lg.jpg"
+            />
+            <source
+              media={`(min-width: ${theme.screens.sm})`}
+              srcSet="/images/avatar/sm.jpg"
+            />
+            <img src="/images/avatar/xsm.jpg" alt="My Avatar" />
           </picture>
         </div>
 

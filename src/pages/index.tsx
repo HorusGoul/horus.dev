@@ -8,6 +8,7 @@ import { theme } from '@/../tailwind.config.js';
 import Container from '@/components/container';
 import { GetStaticProps } from 'next';
 import { Article, fetchArticles } from '@/model/article';
+import ProjectCard from '@/components/project-card';
 
 interface HomeProps {
   articles: Article[];
@@ -101,6 +102,37 @@ export default function Home({ articles }: HomeProps) {
           </div>
         </div>
       </Container>
+
+      <div className="relative">
+        <div className="shape-divider">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M985.66 92.83C906.67 72 823.78 31 743.84 14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84 11.73-114 31.07-172 41.86A600.21 600.21 0 010 27.35V120h1200V95.8c-67.81 23.12-144.29 15.51-214.34-2.97z"
+              className="shape-fill"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div className="bg-black pt-56 pb-12">
+        <Container>
+          <h2 className="font-bold font-mono text-white text-2xl xsm:text-3xl md:text-5xl">
+            Highlights
+          </h2>
+        </Container>
+      </div>
+
+      <div className="bg-black py-8 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0">
+        <ProjectCard
+          title="Atom - Periodic Table & Tests"
+          description="A Progressive Web App that has already helped more than 70.000 students across the world. It's main focus is to make it easier to learn some basic aspects of chemistry such as the Periodic Table."
+          href="https://atom.horuslugo.com"
+        />
+      </div>
     </>
   );
 }

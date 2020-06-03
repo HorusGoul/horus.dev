@@ -7,3 +7,24 @@ body,
 #__next {
   height: 100%;
 }
+
+.shape-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 137px;
+}
+
+.shape-divider .shape-fill {
+  fill: #ffffff;
+}

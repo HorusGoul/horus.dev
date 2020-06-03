@@ -1,0 +1,111 @@
+.projectCard {
+  position: relative;
+  background-size: cover;
+
+  @apply block h-auto shadow-sm text-gray-400 p-6 transition-all duration-200 ease-linear bg-center;
+
+  $bg-base: linear-gradient(
+    0deg,
+    black 10%,
+    transparent 30%,
+    transparent 70%,
+    black 90%
+  );
+
+  @screen xsm {
+    background-image: $bg-base, url('/images/atom/lg.jpg');
+  }
+
+  @screen md {
+    background-image: $bg-base, url('/images/atom/lg.jpg');
+  }
+
+  @screen lg {
+    @apply py-64;
+    background-image: $bg-base, url('/images/atom/lg.jpg');
+  }
+
+  &:hover,
+  &:focus {
+    @apply text-white shadow-lg;
+
+    @screen md {
+      @apply shadow-xl;
+    }
+  }
+}
+
+.overlay {
+  @apply absolute h-full w-full left-0 top-0 bg-black bg-opacity-75;
+
+  backdrop-filter: blur(5px);
+}
+
+.content {
+  @apply relative z-10 flex flex-col justify-center items-center;
+
+  @screen lg {
+    @apply flex-row;
+  }
+}
+
+.title {
+  @apply font-bold tracking-wide text-lg;
+
+  @screen xsm {
+    @apply text-2xl;
+  }
+
+  @screen md {
+    @apply text-4xl;
+  }
+}
+
+.description {
+  @apply block tracking-wide pt-2 font-light text-base;
+
+  opacity: 0.8;
+
+  @screen xsm {
+    @apply text-lg pt-4;
+  }
+
+  @screen md {
+    @apply text-2xl pt-6;
+  }
+}
+
+.device {
+  @apply hidden relative flex-grow-0 py-5 px-3 shadow-xl rounded-lg transition-all duration-300 ease-in-out;
+
+  backdrop-filter: blur(4px);
+  transform: scale(0.9);
+  opacity: 0.8;
+
+  @screen md {
+    @apply block;
+  }
+
+  @screen lg {
+    @apply ml-10;
+  }
+
+  &:hover {
+    @apply shadow-2xl;
+
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+  }
+
+  iframe {
+    @apply rounded-md;
+
+    width: 360px;
+    height: 640px;
+    overflow: hidden;
+  }
+}

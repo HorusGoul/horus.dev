@@ -6,8 +6,24 @@ import classNames from 'classnames';
 import CodeTag from '@/components/code-tag';
 import { theme } from '@/../tailwind.config.js';
 import Container from '@/components/container';
+import { GetStaticProps } from 'next';
+import { Article, fetchArticles } from '@/model/article';
 
-export default function Home() {
+interface HomeProps {
+  articles: Article[];
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const articles = await fetchArticles('horusgoul');
+
+  return {
+    props: {
+      articles,
+    },
+  };
+};
+
+export default function Home({ articles }: HomeProps) {
   return (
     <>
       <Head>
@@ -63,21 +79,9 @@ export default function Home() {
         </h2>
 
         <div className="py-4 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0 md:pt-6">
-          <PostCard
-            href="https://dev.to/horusgoul/using-html-css-and-javascript-to-create-obs-plugins-for-your-live-streaming-sessions-45ij"
-            title="Using HTML, CSS, and JavaScript to Create OBS Plugins for Your Live Streaming Sessions"
-            details="April 11th, 2020 · 2 min read"
-          />
-          <PostCard
-            href="https://dev.to/horusgoul/using-html-css-and-javascript-to-create-obs-plugins-for-your-live-streaming-sessions-45ij"
-            title="Using HTML, CSS, and JavaScript to Create OBS Plugins for Your Live Streaming Sessions"
-            details="April 11th, 2020 · 2 min read"
-          />
-          <PostCard
-            href="https://dev.to/horusgoul/using-html-css-and-javascript-to-create-obs-plugins-for-your-live-streaming-sessions-45ij"
-            title="Using HTML, CSS, and JavaScript to Create OBS Plugins for Your Live Streaming Sessions"
-            details="April 11th, 2020 · 2 min read"
-          />
+          {articles.map(({ id, url, title, details }) => (
+            <PostCard key={id} href={url} title={title} details={details} />
+          ))}
 
           <div className="flex justify-center">
             <a

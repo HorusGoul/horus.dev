@@ -4,6 +4,7 @@ import Container from '../container';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
+import * as bodyScrollLock from 'body-scroll-lock';
 
 export interface ProjectCardProps {
   href: string;
@@ -165,6 +166,20 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
   useEffect(() => {
     createVariants();
   }, [createVariants]);
+
+  useEffect(() => {
+    if (!projectCardRef.current) {
+      return;
+    }
+
+    if (bigPreview) {
+      bodyScrollLock.disableBodyScroll(projectCardRef.current, {
+        reserveScrollBarGap: true,
+      });
+    } else {
+      bodyScrollLock.clearAllBodyScrollLocks();
+    }
+  }, [bigPreview]);
 
   return (
     <div ref={projectCardRef} className={classNames(styles.projectCard)}>

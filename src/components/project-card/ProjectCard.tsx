@@ -306,6 +306,9 @@ function ProjectCard({
               className={classNames(styles.frame)}
               height={0}
               width={0}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              loading="lazy"
             />
           </div>
         </motion.div>

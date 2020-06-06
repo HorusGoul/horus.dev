@@ -14,10 +14,10 @@
     black 90%
   );
 
-  background-image: $bg-base, url('/images/atom/lg.jpg');
+  background-image: $bg-base, url('/images/atom/sm.jpg');
 
   @screen md {
-    background-image: $bg-base, url('/images/atom/lg.jpg');
+    background-image: $bg-base, url('/images/atom/md.jpg');
   }
 
   @screen lg {

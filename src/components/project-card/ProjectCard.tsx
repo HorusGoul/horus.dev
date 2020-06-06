@@ -2,14 +2,16 @@ import classNames from 'classnames';
 import styles from './ProjectCard.module.scss';
 import Container from '../container';
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { RiCloseCircleLine } from 'react-icons/ri';
+import { RiCloseCircleLine, RiExternalLinkLine } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
 import * as bodyScrollLock from 'body-scroll-lock';
+import { FaGithub } from 'react-icons/fa';
 
 export interface ProjectCardProps {
   href: string;
   title: string;
   description: string;
+  sourceCodeHref?: string;
 }
 
 const previewVariants = {
@@ -25,7 +27,12 @@ const previewVariants = {
   },
 } as const;
 
-function ProjectCard({ href, title, description }: ProjectCardProps) {
+function ProjectCard({
+  href,
+  title,
+  description,
+  sourceCodeHref,
+}: ProjectCardProps) {
   const [bigPreview, setBigPreview] = useState(false);
   const [lockHover, setLockHover] = useState(false);
   const [lockScroll, setLockScroll] = useState(true);
@@ -217,14 +224,35 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
           <h3 className={styles.title}>{title}</h3>
 
           <span className={styles.description}>{description}</span>
+
+          <div className={styles.links}>
+            <a href={href} className={styles.link}>
+              <RiExternalLinkLine aria-hidden="true" />
+
+              <span>Open in browser</span>
+            </a>
+
+            {sourceCodeHref && (
+              <a
+                href={sourceCodeHref}
+                className={classNames(styles.link, styles.secondary)}
+              >
+                <FaGithub aria-hidden="true" />
+
+                <span>Source code</span>
+              </a>
+            )}
+          </div>
         </div>
 
         <div
+          aria-hidden="true"
           ref={hiddenFrameRef}
           className={classNames(styles.frame, styles.fake)}
         />
 
         <motion.div
+          aria-hidden="true"
           initial={previewVariants.closed}
           animate={previewControls}
           className={classNames(styles.device, styles.full, styles.real)}
@@ -237,6 +265,7 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
         </motion.div>
 
         <motion.div
+          aria-hidden="true"
           animate={frameControls}
           className={classNames(styles.frameControls, {
             [styles.lockHover]: lockHover,
@@ -244,6 +273,7 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
         >
           <div className="relative h-full w-full">
             <iframe
+              tabIndex={-1}
               ref={iframeRef}
               title="Atom Preview"
               src={href}

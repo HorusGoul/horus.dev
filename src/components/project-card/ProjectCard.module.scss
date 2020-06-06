@@ -171,3 +171,39 @@
     }
   }
 }
+
+.links {
+  @apply grid gap-4 py-6 max-w-md;
+
+  @screen md {
+    @apply grid-cols-2;
+  }
+}
+
+.link {
+  @apply flex p-4 text-gray-700 bg-white rounded-md shadow-md duration-200 ease-linear;
+
+  transition-property: color, box-shadow;
+
+  svg {
+    @apply w-6 h-6;
+  }
+
+  span {
+    @apply pl-4 font-medium;
+  }
+
+  &:hover,
+  &:focus {
+    @apply text-black shadow-xl;
+  }
+
+  &.secondary {
+    @apply text-gray-400 bg-transparent shadow-none;
+
+    &:hover,
+    &:focus {
+      @apply text-white;
+    }
+  }
+}

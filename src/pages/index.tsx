@@ -121,7 +121,7 @@ export default function Home({ articles }: HomeProps) {
       <div className="bg-black pt-56 pb-12">
         <Container>
           <h2 className="font-bold font-mono text-white text-2xl xsm:text-3xl md:text-5xl">
-            Highlights
+            Showcase
           </h2>
         </Container>
       </div>
@@ -131,6 +131,7 @@ export default function Home({ articles }: HomeProps) {
           title="Atom - Periodic Table & Tests"
           description="A Progressive Web App that has already helped more than 70.000 students across the world. It's main focus is to make it easier to learn some basic aspects of chemistry such as the Periodic Table."
           href="https://atom.horuslugo.com"
+          sourceCodeHref="https://github.com/HorusGoul/atom-pwa"
         />
       </div>
     </>

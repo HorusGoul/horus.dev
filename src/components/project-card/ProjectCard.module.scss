@@ -2,7 +2,9 @@
   position: relative;
   background-size: cover;
 
-  @apply block h-auto shadow-sm text-gray-400 p-6 transition-all duration-200 ease-linear bg-center;
+  @apply block h-auto shadow-sm text-gray-400 p-6 bg-center duration-200 ease-in-out;
+
+  transition-property: color, box-shadow, background;
 
   $bg-base: linear-gradient(
     0deg,
@@ -136,5 +138,28 @@
     min-height: 640px;
     max-width: 360px;
     max-height: 640px;
+  }
+}
+
+.frameControls {
+  @apply absolute;
+
+  transition-property: transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+
+  will-change: height, width, top, left;
+  transform: scale(0.9) translate3d(0, 0, 0);
+
+  &.lockHover {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  &:not(.lockHover) {
+    &:hover,
+    &:focus,
+    &:focus-within {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
   }
 }

@@ -15,18 +15,23 @@ const previewVariants = {
   closed: {
     opacity: 0,
     pointerEvents: 'none',
+    transition: { type: 'tween', ease: 'easeInOut', duration: 0.5 },
   },
   open: {
     opacity: 1,
     pointerEvents: 'all',
+    transition: { type: 'tween', ease: 'easeInOut', duration: 0.5 },
   },
 } as const;
 
 function ProjectCard({ href, title, description }: ProjectCardProps) {
   const [bigPreview, setBigPreview] = useState(false);
+  const [lockHover, setLockHover] = useState(false);
+  const [lockScroll, setLockScroll] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const projectCardRef = useRef<HTMLDivElement>(null);
   const hiddenFrameRef = useRef<HTMLDivElement>(null);
+  const animatingRef = useRef(false);
 
   const frameControls = useAnimation();
   const previewControls = useAnimation();
@@ -84,30 +89,48 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
     });
 
     previewControls.setVariants(previewVariants);
-
     frameControls.start('disabled');
   }, [frameControls, previewControls]);
 
   const open = useCallback(async () => {
+    if (animatingRef.current || bigPreview) {
+      return;
+    }
+
+    animatingRef.current = true;
+
     createVariants();
 
+    setLockHover(true);
     await frameControls.start('initialFast');
     await Promise.all([
       frameControls.start('final'),
       previewControls.start('open'),
     ]);
-
     setBigPreview(true);
-  }, [frameControls, createVariants, previewControls]);
+    setLockScroll(false);
+
+    animatingRef.current = false;
+  }, [frameControls, createVariants, previewControls, bigPreview]);
 
   const close = useCallback(async () => {
+    if (animatingRef.current || !bigPreview) {
+      return;
+    }
+
+    animatingRef.current = true;
+
+    setLockScroll(true);
     await Promise.all([
       frameControls.start('initial'),
       previewControls.start('closed'),
     ]);
     await frameControls.start('disabled');
     setBigPreview(false);
-  }, [frameControls, previewControls]);
+    setLockHover(false);
+
+    animatingRef.current = false;
+  }, [frameControls, previewControls, bigPreview]);
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -171,13 +194,18 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
           </button>
         </motion.div>
 
-        <motion.div animate={frameControls} className="absolute">
+        <motion.div
+          animate={frameControls}
+          className={classNames(styles.frameControls, {
+            [styles.lockHover]: lockHover,
+          })}
+        >
           <div className="relative h-full w-full">
             <iframe
               ref={iframeRef}
               title="Atom Preview"
               src={href}
-              scrolling={bigPreview ? 'yes' : 'no'}
+              scrolling={lockScroll ? 'no' : 'yes'}
               className={classNames(styles.frame)}
             />
           </div>

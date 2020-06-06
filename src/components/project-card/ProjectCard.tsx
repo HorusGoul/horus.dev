@@ -6,6 +6,7 @@ import { RiCloseCircleLine, RiExternalLinkLine } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
 import * as bodyScrollLock from 'body-scroll-lock';
 import { FaGithub } from 'react-icons/fa';
+import { useInView } from 'react-intersection-observer';
 
 export interface ProjectCardProps {
   href: string;
@@ -37,9 +38,11 @@ function ProjectCard({
   const [lockHover, setLockHover] = useState(false);
   const [lockScroll, setLockScroll] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const projectCardRef = useRef<HTMLDivElement>(null);
+  const projectCardRef = useRef<HTMLDivElement | null>(null);
   const hiddenFrameRef = useRef<HTMLDivElement>(null);
   const animatingRef = useRef(false);
+
+  const [inViewRef, inView] = useInView({ threshold: 0.15 });
 
   const frameControls = useAnimation();
   const previewControls = useAnimation();
@@ -215,8 +218,21 @@ function ProjectCard({
     }
   }, [bigPreview]);
 
+  const setProjectCardRefs = useCallback(
+    (node: HTMLDivElement) => {
+      projectCardRef.current = node;
+      inViewRef(node);
+    },
+    [inViewRef],
+  );
+
   return (
-    <div ref={projectCardRef} className={classNames(styles.projectCard)}>
+    <div
+      ref={setProjectCardRefs}
+      className={classNames(styles.projectCard, {
+        [styles.inView]: inView,
+      })}
+    >
       <div className={styles.overlay} />
 
       <Container className={styles.content}>

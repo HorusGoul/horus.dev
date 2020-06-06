@@ -36,6 +36,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-icons": "^3.10.0",
+    "react-intersection-observer": "^8.26.2",
     "reading-time": "^1.2.0"
   },
   "devDependencies": {

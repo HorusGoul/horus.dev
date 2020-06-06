@@ -2,9 +2,9 @@
   position: relative;
   background-size: cover;
 
-  @apply block h-auto shadow-sm text-gray-400 p-6 bg-center duration-200 ease-in-out;
+  @apply block h-auto text-white bg-center opacity-0 duration-1000 ease-in-out;
 
-  transition-property: color, box-shadow, background;
+  transition-property: opacity;
 
   $bg-base: linear-gradient(
     0deg,
@@ -14,9 +14,7 @@
     black 90%
   );
 
-  @screen xsm {
-    background-image: $bg-base, url('/images/atom/lg.jpg');
-  }
+  background-image: $bg-base, url('/images/atom/lg.jpg');
 
   @screen md {
     background-image: $bg-base, url('/images/atom/lg.jpg');
@@ -27,13 +25,8 @@
     background-image: $bg-base, url('/images/atom/lg.jpg');
   }
 
-  &:hover,
-  &:focus {
-    @apply text-white shadow-lg;
-
-    @screen md {
-      @apply shadow-xl;
-    }
+  &.inView {
+    @apply opacity-100;
   }
 }
 

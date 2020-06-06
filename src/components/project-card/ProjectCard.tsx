@@ -249,6 +249,8 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
               src={href}
               scrolling={lockScroll ? 'no' : 'yes'}
               className={classNames(styles.frame)}
+              height={0}
+              width={0}
             />
           </div>
         </motion.div>

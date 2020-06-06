@@ -126,7 +126,11 @@
 }
 
 .frame {
-  @apply flex-grow-0 rounded-md;
+  @apply hidden flex-grow-0 rounded-md;
+
+  @screen md {
+    @apply block;
+  }
 
   width: 100%;
   height: 100%;
@@ -140,7 +144,11 @@
 }
 
 .frameControls {
-  @apply absolute;
+  @apply hidden absolute;
+
+  @screen md {
+    @apply block;
+  }
 
   transition-property: transform;
   transition-duration: 200ms;

@@ -126,7 +126,7 @@ export default function Home({ articles }: HomeProps) {
         </Container>
       </div>
 
-      <div className="bg-black py-8 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0">
+      <div className="bg-black py-8 p grid gap-4 xsm:gap-8">
         <ProjectCard
           title="Atom - Periodic Table & Tests"
           description="A Progressive Web App that has already helped more than 70.000 students across the world. It's main focus is to make it easier to learn some basic aspects of chemistry such as the Periodic Table."

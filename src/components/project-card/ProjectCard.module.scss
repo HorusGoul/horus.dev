@@ -14,15 +14,15 @@
     black 90%
   );
 
-  background-image: $bg-base, url('/images/atom/sm.jpg');
+  background-image: $bg-base, var(--image-sm);
 
   @screen md {
-    background-image: $bg-base, url('/images/atom/md.jpg');
+    background-image: $bg-base, var(--image-md);
   }
 
   @screen lg {
     @apply py-64;
-    background-image: $bg-base, url('/images/atom/lg.jpg');
+    background-image: $bg-base, var(--image-lg);
   }
 
   &.inView {

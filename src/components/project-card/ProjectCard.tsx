@@ -12,6 +12,7 @@ export interface ProjectCardProps {
   href: string;
   title: string;
   description: string;
+  image: string;
   sourceCodeHref?: string;
 }
 
@@ -33,6 +34,7 @@ function ProjectCard({
   title,
   description,
   sourceCodeHref,
+  image,
 }: ProjectCardProps) {
   const [bigPreview, setBigPreview] = useState(false);
   const [lockHover, setLockHover] = useState(false);
@@ -226,12 +228,19 @@ function ProjectCard({
     [inViewRef],
   );
 
+  const cardStyle: Record<string, string> = {
+    '--image-sm': `url('/images/${image}/sm.jpg')`,
+    '--image-md': `url('/images/${image}/md.jpg')`,
+    '--image-lg': `url('/images/${image}/lg.jpg')`,
+  };
+
   return (
     <div
       ref={setProjectCardRefs}
       className={classNames(styles.projectCard, {
         [styles.inView]: inView,
       })}
+      style={cardStyle}
     >
       <div className={styles.overlay} />
 

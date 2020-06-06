@@ -77,6 +77,8 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
         top: Math.abs(diffY),
         left: Math.abs(diffX),
         transition: { duration: 0 },
+        height: initial.height,
+        width: initial.width,
       },
       final,
       initialFast: {
@@ -86,11 +88,17 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
           duration: 0,
         },
       },
+      finalFast: {
+        ...final,
+        transition: {
+          ...initial.transition,
+          duration: 0,
+        },
+      },
       initial,
     });
 
     previewControls.setVariants(previewVariants);
-    frameControls.start('disabled');
   }, [frameControls, previewControls]);
 
   const open = useCallback(async () => {
@@ -165,7 +173,26 @@ function ProjectCard({ href, title, description }: ProjectCardProps) {
 
   useEffect(() => {
     createVariants();
-  }, [createVariants]);
+    frameControls.start('disabled');
+  }, [createVariants, frameControls]);
+
+  useEffect(() => {
+    async function resizeListener() {
+      createVariants();
+
+      if (bigPreview) {
+        frameControls.start('finalFast');
+      } else {
+        frameControls.start('disabled');
+      }
+    }
+
+    window.addEventListener('resize', resizeListener);
+
+    return () => {
+      window.removeEventListener('resize', resizeListener);
+    };
+  }, [createVariants, frameControls, previewControls, bigPreview]);
 
   useEffect(() => {
     if (!projectCardRef.current) {

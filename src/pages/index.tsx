@@ -52,7 +52,12 @@ export default function Home({ articles }: HomeProps) {
               media={`(min-width: ${theme.screens.sm})`}
               srcSet="/images/avatar/sm.jpg"
             />
-            <img src="/images/avatar/xsm.jpg" alt="My Avatar" />
+            <source
+              media={`(min-width: ${theme.screens.xsm})`}
+              srcSet="/images/avatar/xsm.jpg"
+            />
+
+            <img src="/images/avatar/xxsm.jpg" alt="My Avatar" />
           </picture>
         </div>
 

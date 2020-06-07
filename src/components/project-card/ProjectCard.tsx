@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './ProjectCard.module.scss';
 import Container from '../container';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, memo, useMemo } from 'react';
 import { RiCloseCircleLine, RiExternalLinkLine } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
 import * as bodyScrollLock from 'body-scroll-lock';
@@ -29,6 +29,8 @@ const previewVariants = {
   },
 } as const;
 
+const IN_VIEW_THRESHOLD = [0, 0.15];
+
 function ProjectCard({
   href,
   title,
@@ -36,6 +38,7 @@ function ProjectCard({
   sourceCodeHref,
   image,
 }: ProjectCardProps) {
+  const [iframeSrc, setIframeSrc] = useState('');
   const [bigPreview, setBigPreview] = useState(false);
   const [lockHover, setLockHover] = useState(false);
   const [lockScroll, setLockScroll] = useState(true);
@@ -44,7 +47,23 @@ function ProjectCard({
   const hiddenFrameRef = useRef<HTMLDivElement>(null);
   const animatingRef = useRef(false);
 
-  const [inViewRef, inView] = useInView({ threshold: 0.15 });
+  const [inViewRef, , inViewEntry] = useInView({
+    threshold: IN_VIEW_THRESHOLD,
+  });
+
+  const { isVisible, shouldLoadFrame } = useMemo(() => {
+    if (!inViewEntry) {
+      return {
+        isVisible: false,
+        shouldLoadFrame: false,
+      };
+    }
+
+    return {
+      isVisible: inViewEntry.intersectionRatio > 0.15,
+      shouldLoadFrame: inViewEntry.intersectionRatio > 0,
+    };
+  }, [inViewEntry]);
 
   const frameControls = useAnimation();
   const previewControls = useAnimation();
@@ -174,11 +193,19 @@ function ProjectCard({
       }
     }
 
-    iframe.contentWindow?.postMessage('enable-preview', '*');
+    function load() {
+      if (!iframe) {
+        return;
+      }
 
+      iframe.contentWindow?.postMessage('enable-preview', '*');
+    }
+
+    iframe.addEventListener('load', load);
     window.addEventListener('message', listener);
 
     return () => {
+      iframe.removeEventListener('load', load);
       window.removeEventListener('message', listener);
     };
   }, [href, open]);
@@ -220,6 +247,12 @@ function ProjectCard({
     }
   }, [bigPreview]);
 
+  useEffect(() => {
+    if (shouldLoadFrame) {
+      setIframeSrc(href);
+    }
+  }, [shouldLoadFrame, href]);
+
   const setProjectCardRefs = useCallback(
     (node: HTMLDivElement) => {
       projectCardRef.current = node;
@@ -238,7 +271,7 @@ function ProjectCard({
     <div
       ref={setProjectCardRefs}
       className={classNames(styles.projectCard, {
-        [styles.inView]: inView,
+        [styles.inView]: isVisible,
       })}
       style={cardStyle}
     >
@@ -301,7 +334,7 @@ function ProjectCard({
               tabIndex={-1}
               ref={iframeRef}
               title="Atom Preview"
-              src={href}
+              src={iframeSrc}
               scrolling={lockScroll ? 'no' : 'yes'}
               className={classNames(styles.frame)}
               height={0}
@@ -317,4 +350,4 @@ function ProjectCard({
   );
 }
 
-export default ProjectCard;
+export default memo(ProjectCard);

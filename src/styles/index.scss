@@ -21,8 +21,16 @@ body,
 .shape-divider svg {
   position: relative;
   display: block;
-  width: calc(100% + 1.3px);
-  height: 137px;
+  width: calc(200% + 1.3px);
+  height: 50px;
+
+  @screen md {
+    height: 80px;
+  }
+
+  @screen lg {
+    height: 137px;
+  }
 }
 
 .shape-divider .shape-fill {

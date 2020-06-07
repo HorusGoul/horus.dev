@@ -12,7 +12,7 @@ function PostCard({ href, title, details }: PostCardProps) {
       href={href}
       className={classNames(
         'block shadow-sm  text-gray-700 rounded-none p-6 xsm:rounded-md ',
-        'transition-all duration-200 ease-linear',
+        'transition-color-shadow duration-200 ease-linear',
         'hover:text-black hover:shadow-lg hover:md:shadow-xl',
         'focus:text-black focus:shadow-lg hover:md:shadow-xl',
       )}

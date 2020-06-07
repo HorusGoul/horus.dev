@@ -28,3 +28,7 @@ body,
 .shape-divider .shape-fill {
   fill: #ffffff;
 }
+
+.transition-color-shadow {
+  transition-property: color, background-color, box-shadow;
+}

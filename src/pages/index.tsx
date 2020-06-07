@@ -91,7 +91,7 @@ export default function Home({ articles }: HomeProps) {
                 'flex items-center bg-black rounded-full px-8 py-2 shadow-none',
                 'text-white text-center text-lg font-bold',
                 'cursor-pointer select-none',
-                'transition-all duration-200 ease-linear',
+                'transition-color-shadow duration-200 ease-linear',
                 'hover:shadow-xl hover:bg-gray-800 hover:text-gray-100',
                 'focus:shadow-xl focus:bg-gray-800 focus:text-gray-100',
               )}

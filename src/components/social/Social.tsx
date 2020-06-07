@@ -88,7 +88,7 @@ function SocialItem({ href, icon, children, label }: SocialItemProps) {
           'px-6 py-4',
           'flex items-center',
           'text-gray-700',
-          'transition-all duration-200 ease-linear',
+          'transition-color-shadow duration-200 ease-linear',
           'focus:text-black focus:shadow-lg md:focus:shadow-xl',
           'hover:text-black hover:shadow-lg md:focus:shadow-xl',
         )}

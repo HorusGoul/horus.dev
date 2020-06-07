@@ -43,7 +43,7 @@ export default function Home({ articles }: HomeProps) {
             </h1>
           </div>
 
-          <picture className="rounded-full overflow-hidden shadow-xl float-right w-20 xsm:w-32 md:float-none md:w-48 lg:w-64 ">
+          <picture className="rounded-full overflow-hidden shadow-xl float-right h-20 w-20 xsm:w-32 xsm:h-32 md:float-none md:w-48 md:h-48 lg:w-64 lg:h-64 ">
             <source
               media={`(min-width: ${theme.screens.lg})`}
               srcSet="/images/avatar/lg.jpg"

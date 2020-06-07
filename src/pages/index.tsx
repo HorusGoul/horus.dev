@@ -124,7 +124,7 @@ export default function Home({ articles }: HomeProps) {
         />
       </div>
 
-      <SectionDivider color="black" />
+      <SectionDivider reverse={true} />
 
       <div className="pt-56 pb-24">
         <Container>Footer</Container>

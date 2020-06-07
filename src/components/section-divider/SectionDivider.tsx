@@ -1,11 +1,20 @@
 interface SectionDividerProps {
   color?: string;
+  backgroundColor?: string;
+  reverse?: boolean;
 }
 
-function SectionDivider({ color = '#ffffff' }: SectionDividerProps) {
+function SectionDivider({
+  color = '#ffffff',
+  backgroundColor = '#000000',
+  reverse = false,
+}: SectionDividerProps) {
   return (
     <div className="relative">
-      <div className="shape-divider">
+      <div
+        className="shape-divider"
+        style={{ backgroundColor, transform: reverse ? 'unset' : undefined }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"

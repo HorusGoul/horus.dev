@@ -278,7 +278,7 @@ function ProjectCard({
       <div className={styles.overlay} />
 
       <Container className={styles.content}>
-        <div className="relative">
+        <div className="relative w-full flex-1">
           <h3 className={styles.title}>{title}</h3>
 
           <span className={styles.description}>{description}</span>

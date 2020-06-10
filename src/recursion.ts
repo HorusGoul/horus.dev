@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 
 export function useRecursion() {
-  const [recursionCount, setRecursionCount] = useState(9);
+  const [recursionCount, setRecursionCount] = useState(0);
 
   useEffect(() => {
     if (recursionCount && typeof window !== 'undefined') {

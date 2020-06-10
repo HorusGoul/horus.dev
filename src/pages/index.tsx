@@ -33,7 +33,35 @@ export default function Home({ articles }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Horus Lugo</title>
+        <title>Horus Lugo — Full Stack Developer</title>
+        <meta name="title" content="Horus Lugo — Full Stack Developer" />
+        <meta
+          name="description"
+          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://horus-dev.now.sh/" />
+        <meta property="og:title" content="Horus Lugo — Full Stack Developer" />
+        <meta
+          property="og:description"
+          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
+        />
+        <meta property="og:image" content="/images/og/image.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://horus-dev.now.sh/" />
+        <meta
+          property="twitter:title"
+          content="Horus Lugo — Full Stack Developer"
+        />
+        <meta
+          property="twitter:description"
+          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
+        />
+        <meta property="twitter:image" content="/images/og/image.png" />
       </Head>
 
       <Container>
@@ -42,9 +70,9 @@ export default function Home({ articles }: HomeProps) {
             <h2 className="font-medium text-3xl xsm:text-4xl md:text-6xl">
               Horus Lugo
             </h2>
-            <h1 className="font-bold font-mono text-purple-600 text-xl xsm:text-2xl md:text-4xl">
-              Web Engineer
-            </h1>
+            <h2 className="font-bold font-mono text-purple-600 text-xl xsm:text-2xl md:text-4xl">
+              Full Stack Developer
+            </h2>
           </div>
 
           <picture className="rounded-full overflow-hidden shadow-xl float-right h-20 w-20 xsm:w-32 xsm:h-32 md:float-none md:w-48 md:h-48 lg:w-64 lg:h-64 ">

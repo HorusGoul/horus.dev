@@ -43,7 +43,7 @@ export default function Home({ articles }: HomeProps) {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://horus-dev.now.sh/" />
+        <meta property="og:url" content="https://horus.dev" />
         <meta property="og:title" content="Horus Lugo — Full Stack Developer" />
         <meta
           property="og:description"
@@ -53,7 +53,7 @@ export default function Home({ articles }: HomeProps) {
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://horus-dev.now.sh/" />
+        <meta property="twitter:url" content="https://horus.dev" />
         <meta
           property="twitter:title"
           content="Horus Lugo — Full Stack Developer"

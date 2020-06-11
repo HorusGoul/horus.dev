@@ -5,11 +5,22 @@
       "destination": "https://dev.to/horusgoul/creating-a-minecraft-mod-using-java-and-fabric-3bmo"
     },
     {
+      "source": "/minecraft-mod-java-fabric-guide/",
+      "destination": "https://dev.to/horusgoul/creating-a-minecraft-mod-using-java-and-fabric-3bmo"
+    },
+    {
       "source": "/z1-internship-experience",
       "destination": "https://dev.to/horusgoul/the-importance-of-choosing-a-cool-company-for-your-software-internship-2n7p"
     },
+    {
+      "source": "/z1-internship-experience/",
+      "destination": "https://dev.to/horusgoul/the-importance-of-choosing-a-cool-company-for-your-software-internship-2n7p"
+    },
     { "source": "/es", "destination": "/" },
+    { "source": "/es/", "destination": "/" },
     { "source": "/es/sobre-mi", "destination": "/" },
-    { "source": "/about-me", "destination": "/" }
+    { "source": "/es/sobre-mi/", "destination": "/" },
+    { "source": "/about-me", "destination": "/" },
+    { "source": "/about-me/", "destination": "/" }
   ]
 }

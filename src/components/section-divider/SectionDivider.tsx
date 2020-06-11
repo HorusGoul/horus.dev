@@ -1,3 +1,5 @@
+import styles from './SectionDivider.module.scss';
+
 interface SectionDividerProps {
   color?: string;
   backgroundColor?: string;
@@ -12,7 +14,7 @@ function SectionDivider({
   return (
     <div className="relative">
       <div
-        className="shape-divider"
+        className={styles.shapeDivider}
         style={{ backgroundColor, transform: reverse ? 'unset' : undefined }}
       >
         <svg

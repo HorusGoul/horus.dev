@@ -147,7 +147,7 @@ export default function Home({ articles }: HomeProps) {
 
       <SectionDivider />
 
-      <div className="bg-black pt-56 pb-12">
+      <div className="bg-black pb-4 pt-20 md:pt-56">
         <Container>
           <h2 className="font-bold font-mono text-white text-2xl xsm:text-3xl md:text-5xl">
             Showcase
@@ -155,7 +155,7 @@ export default function Home({ articles }: HomeProps) {
         </Container>
       </div>
 
-      <div className="bg-black py-8 p grid gap-4 xsm:gap-8">
+      <div className="bg-black pt-8 pb-32 grid gap-12">
         <ProjectCard
           title="Atom - Periodic Table & Tests"
           description="A Progressive Web App that has already helped more than 70.000 students across the world. It's main focus is to make it easier to learn some basic aspects of chemistry such as the Periodic Table."
@@ -173,7 +173,7 @@ export default function Home({ articles }: HomeProps) {
 
       <SectionDivider reverse={true} />
 
-      <div className="pt-32 pb-4">
+      <div className="pt-12 md:pt-32 pb-4">
         <Container>
           <p className="flex flex-col text-gray-900">
             <span className="text-xl font-medium pb-2">
@@ -208,7 +208,7 @@ export default function Home({ articles }: HomeProps) {
               </span>
             </span>
 
-            <span className="font-light">
+            <span className="font-light mt-2">
               Follow me on{' '}
               <a
                 href="https://twitter.com/HorusGoul"

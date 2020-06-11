@@ -1,0 +1,24 @@
+.shapeDivider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+
+  svg {
+    position: relative;
+    display: block;
+    width: calc(200% + 1.3px);
+    height: 48px;
+
+    @screen md {
+      height: 80px;
+    }
+
+    @screen lg {
+      height: 130px;
+    }
+  }
+}

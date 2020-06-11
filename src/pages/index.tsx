@@ -39,6 +39,7 @@ export default function Home({ articles }: HomeProps) {
           name="description"
           content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
         />
+        <link rel="canonical" href="https://horus.dev" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />

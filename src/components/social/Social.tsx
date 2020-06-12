@@ -28,35 +28,35 @@ function Social({ className }: SocialProps) {
         twitter.com/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://twitter.com/horusgoul"
+        href="https://github.com/horusgoul"
         label="GitHub"
         icon={<FaGithub />}
       >
         github.com/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://twitter.com/horusgoul"
+        href="https://linkedin.com/in/horusgoul"
         label="LinkedIn"
         icon={<FaLinkedin />}
       >
         linkedin.com/in/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://twitter.com/horusgoul"
+        href="https://youtube.com/horusgoul"
         label="YouTube"
         icon={<FaYoutube />}
       >
         youtube.com/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://twitter.com/horusgoul"
+        href="https://twitch.tv/horusgoul"
         label="Twitch"
         icon={<FaTwitch />}
       >
         twitch.com/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://twitter.com/horusgoul"
+        href="mailto:horusgoul@gmail.com"
         label="Email"
         icon={<FaAt />}
       >

@@ -71,7 +71,7 @@ export default function Home({ articles }: HomeProps) {
             <h2 className="font-medium text-3xl xsm:text-4xl md:text-6xl">
               Horus Lugo
             </h2>
-            <h2 className="font-bold font-mono text-purple-600 text-xl xsm:text-2xl md:text-4xl">
+            <h2 className="font-bold font-mono w-40 text-purple-600 text-2xl sm:w-auto md:text-4xl">
               Full Stack Developer
             </h2>
           </div>

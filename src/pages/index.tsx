@@ -98,7 +98,7 @@ export default function Home({ articles }: HomeProps) {
           </picture>
         </div>
 
-        <p className="text-gray-700 text-left text-sm leading-7 tracking-wider pt-4 xsm:pt-8 xsm:text-xl xsm:leading-8 md:text-2xl md:leading-10 md:pt-16">
+        <!--<p className="text-gray-700 text-left text-sm leading-7 tracking-wider pt-4 xsm:pt-8 xsm:text-xl xsm:leading-8 md:text-2xl md:leading-10 md:pt-16">
           Currently creating amazing products at{' '}
           <a href="https://z1.digital" className="text-black hover:underline">
             Z1 Digital Studio
@@ -106,7 +106,7 @@ export default function Home({ articles }: HomeProps) {
           using modern tools such as, among others, <CodeTag>React</CodeTag>,{' '}
           <CodeTag>Node.js</CodeTag>, <CodeTag>GraphQL</CodeTag>, and{' '}
           <CodeTag>TypeScript</CodeTag>
-        </p>
+        </p>-->
 
         <div className="pt-16 md:pt-24">
           <h3 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">

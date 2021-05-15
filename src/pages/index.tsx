@@ -27,41 +27,32 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   };
 };
 
+const META_TITLE = `Horus Lugo — Full Stack Engineer`;
+const META_BIO = `Building software for fun since 2008 to create websites, apps, games, or whatever I find interesting at the moment. React, Node.js, GraphQL, and TypeScript are part of my preferred stack for developing Full Stack projects.`;
+
 export default function Home({ articles }: HomeProps) {
   const recursion = useRecursion();
 
   return (
     <>
       <Head>
-        <title>Horus Lugo — Full Stack Developer</title>
-        <meta name="title" content="Horus Lugo — Full Stack Developer" />
-        <meta
-          name="description"
-          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
-        />
+        <title>{META_TITLE}</title>
+        <meta name="title" content={META_TITLE} />
+        <meta name="description" content={META_BIO} />
         <link rel="canonical" href="https://horus.dev" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://horus.dev" />
-        <meta property="og:title" content="Horus Lugo — Full Stack Developer" />
-        <meta
-          property="og:description"
-          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
-        />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_BIO} />
         <meta property="og:image" content="/images/og/image.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://horus.dev" />
-        <meta
-          property="twitter:title"
-          content="Horus Lugo — Full Stack Developer"
-        />
-        <meta
-          property="twitter:description"
-          content="Currently using modern tools such as, among others, React, Node.js, GraphQL, and TypeScript to create amazing products at Z1."
-        />
+        <meta property="twitter:title" content={META_TITLE} />
+        <meta property="twitter:description" content={META_BIO} />
         <meta property="twitter:image" content="/images/og/image.png" />
       </Head>
 
@@ -72,7 +63,7 @@ export default function Home({ articles }: HomeProps) {
               Horus Lugo
             </h2>
             <h2 className="font-bold font-mono w-40 text-purple-600 text-2xl sm:w-auto md:text-4xl">
-              Full Stack Developer
+              Full Stack Engineer
             </h2>
           </div>
 
@@ -98,15 +89,13 @@ export default function Home({ articles }: HomeProps) {
           </picture>
         </div>
 
-        <!--<p className="text-gray-700 text-left text-sm leading-7 tracking-wider pt-4 xsm:pt-8 xsm:text-xl xsm:leading-8 md:text-2xl md:leading-10 md:pt-16">
-          Currently creating amazing products at{' '}
-          <a href="https://z1.digital" className="text-black hover:underline">
-            Z1 Digital Studio
-          </a>{' '}
-          using modern tools such as, among others, <CodeTag>React</CodeTag>,{' '}
-          <CodeTag>Node.js</CodeTag>, <CodeTag>GraphQL</CodeTag>, and{' '}
-          <CodeTag>TypeScript</CodeTag>
-        </p>-->
+        <p className="text-gray-700 text-left text-sm leading-7 tracking-wider pt-4 xsm:pt-8 xsm:text-xl xsm:leading-8 md:text-2xl md:leading-10 md:pt-16">
+          Building software for fun since 2008 to create websites, apps, games,
+          or whatever I find interesting at the moment. <CodeTag>React</CodeTag>
+          , <CodeTag>Node.js</CodeTag>, <CodeTag>GraphQL</CodeTag>, and{' '}
+          <CodeTag>TypeScript</CodeTag> are part of my preferred stack for
+          developing Full Stack projects.
+        </p>
 
         <div className="pt-16 md:pt-24">
           <h3 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">

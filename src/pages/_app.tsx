@@ -35,6 +35,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
+        {/* Plausible Analytics */}
+        <script
+          async
+          defer
+          data-domain="horus.dev"
+          data-api="/api/event"
+          src="/js/script.js"
+        ></script>
       </Head>
       <Component {...pageProps} />
     </>

@@ -3,9 +3,10 @@ import Image from 'next/image';
 
 interface HeaderProps {
   goBackHref?: string;
+  title: string;
 }
 
-function Header({ goBackHref = '/' }: HeaderProps) {
+function Header({ goBackHref = '/', title }: HeaderProps) {
   return (
     <header>
       <nav className="h-16 sm:h-32 flex items-center my-0 mx-auto max-w-5xl">
@@ -21,7 +22,9 @@ function Header({ goBackHref = '/' }: HeaderProps) {
             </div>
             <div className="flex items-center group-hover:opacity-70 transition-opacity duration-200">
               <span className="text-4xl text-gray-500">/</span>
-              <span className="text-4xl font-semibold text-gray-900">blog</span>
+              <span className="text-4xl font-semibold text-gray-900">
+                {title}
+              </span>
             </div>
           </a>
         </Link>

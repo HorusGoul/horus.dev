@@ -69,7 +69,7 @@ export default function Post({ code, frontmatter }: PostProps) {
 
   return (
     <div>
-      <Header goBackHref="/blog" />
+      <Header title="blog" goBackHref="/blog" />
 
       <article className="mt-8 prose lg:prose-xl max-w-5xl mx-auto my-0">
         <h1>{frontmatter.title}</h1>

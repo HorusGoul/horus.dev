@@ -29,6 +29,7 @@
     "node": "14.x"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "body-scroll-lock": "^3.1.5",
     "classnames": "^2.2.6",
     "framer-motion": "2.6.13",

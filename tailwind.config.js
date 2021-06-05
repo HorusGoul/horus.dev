@@ -138,8 +138,21 @@ module.exports = {
         900: '#702459',
       },
     },
-    extend: {},
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+          },
+        },
+      },
+    },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -5,6 +5,7 @@ import path from 'path';
 import { bundleMdx, BundleMDXResult } from '@/mdx';
 import { useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
+import Header from '@/components/header';
 
 interface PostProps extends BundleMDXResult {
   slug: string;
@@ -35,22 +36,21 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-export default function Post({ slug, code, frontmatter }: PostProps) {
+export default function Post({ code, frontmatter }: PostProps) {
   const MdxComponent = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <>
-      Post {slug}
-      <h1>{frontmatter.title}</h1>
-      <div>
-        <MdxComponent
-          components={{
-            p: function Paragraph(c) {
-              return <p className="text-red-700" {...c} />;
-            },
-          }}
-        />
-      </div>
-    </>
+    <div>
+      <Header goBackHref="/blog" />
+
+      <article className="mt-8 prose lg:prose-xl max-w-5xl mx-auto my-0">
+        <h1>{frontmatter.title}</h1>
+        <MdxComponent />
+
+        <pre>
+          <code>asdasd</code>
+        </pre>
+      </article>
+    </div>
   );
 }

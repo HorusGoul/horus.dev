@@ -1,4 +1,8 @@
 module.exports = {
+  images: {
+    domains: ['thepracticaldev.s3.amazonaws.com'],
+  },
+
   async rewrites() {
     return [
       {

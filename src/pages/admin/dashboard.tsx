@@ -1,14 +1,12 @@
 import { supabase } from '@/supabaseClient';
 import { GetServerSideProps } from 'next';
 import { User } from '@supabase/supabase-js';
+import { Post } from '.prisma/client';
+import prisma from '@/prisma';
 
 interface DashboardProps {
   user: User;
-  posts: PostRow[];
-}
-
-interface PostRow {
-  id: string;
+  posts: Post[];
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -20,9 +18,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const posts = await supabase.from<PostRow>('posts');
+  const posts = await prisma.post.findMany();
 
-  return { props: { user, posts: posts.body ?? [] } };
+  return { props: { user, posts } };
 };
 
 function Dashboard({ user, posts }: DashboardProps) {

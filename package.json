@@ -10,7 +10,8 @@
     "start": "next start",
     "typecheck": "tsc",
     "lint:base": "eslint --ext .js,.json,.ts,.tsx",
-    "lint": "yarn lint:base 'src/**'"
+    "lint": "yarn lint:base 'src/**'",
+    "postinstall": "prisma generate"
   },
   "lint-staged": {
     "src/**/*.{js,json,ts,tsx}": [
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.6.0",
+    "@prisma/client": "^2.24.1",
     "@supabase/supabase-js": "^1.13.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
@@ -67,6 +69,7 @@
     "postcss": "^8.3.0",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.1",
+    "prisma": "^2.24.1",
     "sass": "^1.34.1",
     "tailwindcss": "^2.1.4",
     "typescript": "^4.3.2"

@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13-alpine
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      POSTGRES_USER: backend
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: backend
+      PG_SYSTEM_MAX_CONNECTIONS: 200
+    command: ['-c', 'max_connections=200', '-c', 'log_statement=all']
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - common-network
+
+volumes:
+  db-data:
+
+networks:
+  common-network:
+    driver: bridge

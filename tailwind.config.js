@@ -154,10 +154,13 @@ module.exports = {
           },
         },
       },
+    },
+  },
+  variants: {
+    extend: {
       opacity: ['active'],
     },
   },
-  variants: {},
   plugins: [
     require('@tailwindcss/typography'),
     // eslint-disable-next-line @typescript-eslint/no-var-requires

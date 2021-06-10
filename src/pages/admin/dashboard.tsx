@@ -21,26 +21,20 @@ export const getServerSideProps = createGetServerSideProps<DashboardProps>(
 
 function Dashboard({ user, posts }: DashboardProps) {
   return (
-    <div className="flex flex-col">
-      {user.email}
-
-      <header className="flex justify-between">
+    <div className="flex flex-col max-w-5xl w-full my-0 mx-auto">
+      <header className="p-4 flex items-center w-full">
         <h1 className="text-3xl">Posts</h1>
 
         <Link href="/admin/post/new">
           <a
-            className="px-8 py-2 bg-green-500 text-white 
-              rounded-full font-bold flex items-center transition-opacity 
-              hover:opacity-90 active:opacity-70"
+            className="ml-auto px-8 py-2 bg-green-500 text-white 
+      rounded-full font-bold flex items-center transition-opacity 
+      hover:opacity-90 active:opacity-70"
           >
             Create new post
           </a>
         </Link>
       </header>
-
-      <pre>
-        <code>{JSON.stringify(posts, null, 2)}</code>
-      </pre>
     </div>
   );
 }

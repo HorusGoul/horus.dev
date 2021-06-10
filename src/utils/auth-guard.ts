@@ -4,7 +4,7 @@ import { User } from '@supabase/gotrue-js';
 import { RedirectResult } from './ssr';
 
 export async function authGuard(
-  context: GetServerSidePropsContext,
+  context: Pick<GetServerSidePropsContext, 'req'>,
 ): Promise<User> {
   const { user, error } = await supabase.auth.api.getUserByCookie(context.req);
 

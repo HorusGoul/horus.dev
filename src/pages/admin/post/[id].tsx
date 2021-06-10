@@ -8,6 +8,9 @@ import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import { MdArrowBack } from 'react-icons/md';
 import AdminContainer from '@/components/admin-container';
+import MarkdownEditor from '@/components/markdown-editor';
+import { useState } from 'react';
+import { PostEditorProvider } from '@/contexts/post-editor';
 
 interface PostEditorParams extends ParsedUrlQuery {
   id: string;
@@ -70,6 +73,10 @@ export default function PostEditor({ post }: PostEditorProps) {
           <PostStatePill state={state} />
         </div>
       </header>
+
+      <PostEditorProvider post={post}>
+        <MarkdownEditor />
+      </PostEditorProvider>
     </AdminContainer>
   );
 }

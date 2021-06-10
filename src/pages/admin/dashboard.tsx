@@ -1,28 +1,23 @@
-import { supabase } from '@/supabaseClient';
-import { GetServerSideProps } from 'next';
 import { User } from '@supabase/supabase-js';
 import { Post } from '.prisma/client';
 import prisma from '@/prisma';
 import Link from 'next/link';
+import { authGuard } from '@/utils/auth-guard';
+import { createGetServerSideProps } from '@/utils/ssr';
 
 interface DashboardProps {
   user: User;
   posts: Post[];
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { user, error } = await supabase.auth.api.getUserByCookie(context.req);
+export const getServerSideProps = createGetServerSideProps<DashboardProps>(
+  async (context) => {
+    const user = await authGuard(context);
+    const posts = await prisma.post.findMany();
 
-  if (error || !user) {
-    return {
-      redirect: { destination: '/admin', permanent: false },
-    };
-  }
-
-  const posts = await prisma.post.findMany();
-
-  return { props: { user, posts } };
-};
+    return { props: { user, posts } };
+  },
+);
 
 function Dashboard({ user, posts }: DashboardProps) {
   return (

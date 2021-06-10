@@ -1,6 +1,7 @@
 import { Post } from '.prisma/client';
 import prisma from '@/prisma';
-import { GetServerSideProps } from 'next';
+import { authGuard } from '@/utils/auth-guard';
+import { createGetServerSideProps } from '@/utils/ssr';
 import { ParsedUrlQuery } from 'querystring';
 
 interface PostEditorParams extends ParsedUrlQuery {
@@ -11,10 +12,11 @@ interface PostEditorProps {
   post: Post;
 }
 
-export const getServerSideProps: GetServerSideProps<
+export const getServerSideProps = createGetServerSideProps<
   PostEditorProps,
   PostEditorParams
-> = async (context) => {
+>(async (context) => {
+  await authGuard(context);
   const id = context.params?.id;
 
   if (id === 'new') {
@@ -41,7 +43,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: { post },
   };
-};
+});
 
 export default function PostEditor({ post }: PostEditorProps) {
   return (

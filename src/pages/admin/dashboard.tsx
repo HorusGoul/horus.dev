@@ -4,6 +4,10 @@ import prisma from '@/prisma';
 import Link from 'next/link';
 import { authGuard } from '@/utils/auth-guard';
 import { createGetServerSideProps } from '@/utils/ssr';
+import { getPostCardDetails, getPostState } from '@/utils/post';
+import PostStatePill from '@/components/post-state-pill';
+import PostCard from '@/components/post-card';
+import AdminContainer from '@/components/admin-container';
 
 interface DashboardProps {
   user: User;
@@ -21,7 +25,7 @@ export const getServerSideProps = createGetServerSideProps<DashboardProps>(
 
 function Dashboard({ user, posts }: DashboardProps) {
   return (
-    <div className="flex flex-col max-w-5xl w-full my-0 mx-auto">
+    <AdminContainer>
       <header className="p-4 flex items-center w-full">
         <h1 className="text-3xl">Posts</h1>
 
@@ -35,7 +39,28 @@ function Dashboard({ user, posts }: DashboardProps) {
           </a>
         </Link>
       </header>
-    </div>
+
+      <div className="py-4 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0 md:pt-6">
+        {posts.map((post) => {
+          const state = getPostState(post);
+          const details = getPostCardDetails(post);
+
+          return (
+            <PostCard
+              key={post.id}
+              title={post.title}
+              href={`/admin/post/${post.id}`}
+              details={
+                <div className="inline-flex">
+                  <PostStatePill state={state} />
+                  <span className="ml-4">{details}</span>
+                </div>
+              }
+            />
+          );
+        })}
+      </div>
+    </AdminContainer>
   );
 }
 

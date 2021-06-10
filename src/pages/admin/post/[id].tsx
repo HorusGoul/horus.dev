@@ -7,6 +7,7 @@ import { createGetServerSideProps } from '@/utils/ssr';
 import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import { MdArrowBack } from 'react-icons/md';
+import AdminContainer from '@/components/admin-container';
 
 interface PostEditorParams extends ParsedUrlQuery {
   id: string;
@@ -53,7 +54,7 @@ export default function PostEditor({ post }: PostEditorProps) {
   const state = getPostState(post);
 
   return (
-    <div className="flex flex-col max-w-5xl w-full my-0 mx-auto">
+    <AdminContainer>
       <header className="p-4 flex items-center w-full">
         <Link href="/admin/dashboard">
           <a className="flex items-center px-4 py-2 bg-gray-400 text-gray-800 font-semibold rounded-full hover:opacity-90 active:opacity-70">
@@ -69,6 +70,6 @@ export default function PostEditor({ post }: PostEditorProps) {
           <PostStatePill state={state} />
         </div>
       </header>
-    </div>
+    </AdminContainer>
   );
 }

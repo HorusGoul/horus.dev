@@ -6,9 +6,11 @@
   textarea.mde-text {
     width: 100%;
     border: 0;
-    padding: $mde-editor-padding;
     vertical-align: top;
     resize: vertical;
     overflow-y: auto;
+
+    @apply p-4 rounded-lg bg-gray-100 min-h-screen mb-72 transition-colors duration-200 
+      focus:ring-0 focus:bg-gray-200 outline-none font-mono;
   }
 }

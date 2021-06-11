@@ -2,7 +2,6 @@
 
 .markdownEditor {
   &:global(.react-mde) {
-    border: 1px solid $mde-border-color;
     border-radius: $mde-border-radius;
 
     :global {
@@ -27,7 +26,6 @@
         line-height: 16px;
         color: gray;
         background-color: $mde-toolbar-color;
-        border-top: 1px solid $mde-border-color;
         position: relative;
 
         .image-input {

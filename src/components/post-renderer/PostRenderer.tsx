@@ -2,6 +2,7 @@ import { getMDXComponent } from 'mdx-bundler/client';
 import NextImage, { ImageProps } from 'next/image';
 import { useMemo } from 'react';
 import 'prism-theme-night-owl';
+import { PostFrontmatter } from '@/utils/post';
 
 const components = {
   img: function CustomImage({
@@ -39,10 +40,7 @@ const components = {
 
 interface PostRendererProps {
   code: string;
-  frontmatter: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  };
+  frontmatter: PostFrontmatter;
 }
 
 function PostRenderer({ code, frontmatter }: PostRendererProps) {

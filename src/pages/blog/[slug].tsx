@@ -1,32 +1,56 @@
-import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import fs from 'fs/promises';
-import path from 'path';
-import { bundleMdx, BundleMDXResult } from '@/mdx';
+import { bundleMdx } from '@/mdx';
 import React from 'react';
 import Header from '@/components/header';
 import PostRenderer from '@/components/post-renderer';
+import { getPostState, PostFrontmatter } from '@/utils/post';
+import Head from 'next/head';
+import prisma from '@/prisma';
+import { authGuard } from '@/utils/auth-guard';
+import { createGetServerSideProps, RedirectResult } from '@/utils/ssr';
 
-interface PostProps extends BundleMDXResult {
+interface PostProps {
   slug: string;
+  code: string;
+  frontmatter: PostFrontmatter;
 }
 
 interface PostQueryParams extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getServerSideProps: GetServerSideProps<
+export const getServerSideProps = createGetServerSideProps<
   PostProps,
   PostQueryParams
-> = async (context) => {
+>(async (context) => {
   const slug = context.params?.slug ?? '';
 
-  const content = await fs.readFile(
-    path.resolve(process.cwd(), 'src/pages/blog', 'example.mdx'),
-    'utf8',
-  );
+  const post = await prisma.post.findFirst({
+    where: { slug },
+    orderBy: { publishedAt: 'desc' },
+  });
 
-  const bundleMdxResult = await bundleMdx(content);
+  if (!post) {
+    return {
+      redirect: {
+        destination: '/blog',
+        permanent: false,
+      },
+    };
+  }
+
+  const state = getPostState(post);
+
+  if (state !== 'published') {
+    await authGuard(context).catch(() => {
+      throw new RedirectResult({
+        destination: '/blog',
+        permanent: false,
+      });
+    });
+  }
+
+  const bundleMdxResult = await bundleMdx(post.body);
 
   return {
     props: {
@@ -34,11 +58,41 @@ export const getServerSideProps: GetServerSideProps<
       ...bundleMdxResult,
     },
   };
-};
+});
 
 export default function Post({ code, frontmatter }: PostProps) {
+  const title = frontmatter.title ?? '';
+  const slug = frontmatter.slug ?? '';
+  const ogImage = frontmatter.ogImage ?? '/images/og/image.png';
+  const description = frontmatter.description ?? '';
+
   return (
     <div>
+      <Head>
+        <title>{title}</title>
+
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={`https://horus.dev/blog/${slug}`} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://horus.dev/blog/${slug}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content={`https://horus.dev/blog/${slug}`}
+        />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={ogImage} />
+      </Head>
+
       <Header title="blog" goBackHref="/blog" />
 
       <PostRenderer code={code} frontmatter={frontmatter} />

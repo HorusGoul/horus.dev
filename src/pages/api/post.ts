@@ -3,6 +3,7 @@ import prisma from '@/prisma';
 import { apiAuthGuard } from '@/utils/auth-guard';
 import { PostFrontmatter } from '@/utils/post';
 import { createApiHandler } from '@/utils/ssr';
+import superjson from 'superjson';
 
 export default createApiHandler(async (req, res) => {
   if (req.method !== 'POST' || !req.body.id) {
@@ -17,7 +18,7 @@ export default createApiHandler(async (req, res) => {
 
   const id = req.body.id;
 
-  await prisma.post.update({
+  const updatedPost = await prisma.post.update({
     where: { id },
     data: {
       body: req.body.body,
@@ -30,5 +31,5 @@ export default createApiHandler(async (req, res) => {
     },
   });
 
-  res.status(200).send({});
+  res.status(200).send(superjson.stringify(updatedPost));
 });

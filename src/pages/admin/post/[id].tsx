@@ -11,6 +11,7 @@ import AdminContainer from '@/components/admin-container';
 import MarkdownEditor from '@/components/markdown-editor';
 import { PostEditorProvider } from '@/contexts/post-editor';
 import { useAuth } from '@/utils/useAuth';
+import { useState } from 'react';
 
 interface PostEditorParams extends ParsedUrlQuery {
   id: string;
@@ -64,8 +65,10 @@ ogImage: null
   };
 });
 
-export default function PostEditor({ post }: PostEditorProps) {
+export default function PostEditor({ post: initialPost }: PostEditorProps) {
   useAuth();
+
+  const [post, setPost] = useState(() => initialPost);
   const state = getPostState(post);
 
   return (
@@ -84,7 +87,7 @@ export default function PostEditor({ post }: PostEditorProps) {
         </div>
       </header>
 
-      <PostEditorProvider post={post}>
+      <PostEditorProvider post={post} setPost={setPost}>
         <MarkdownEditor />
       </PostEditorProvider>
     </AdminContainer>

@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import superjson from 'superjson';
 
 interface PostEditorContext {
   post: Post;
@@ -25,12 +26,14 @@ export const PostEditorContext = createContext<PostEditorContext>({});
 
 interface PostEditorProviderProps {
   post: Post;
+  setPost: (post: Post) => void;
   children: React.ReactNode;
 }
 
 export function PostEditorProvider({
   children,
   post,
+  setPost,
 }: PostEditorProviderProps) {
   const [draft, setDraft] = useState(() => ({ ...post }));
 
@@ -41,31 +44,36 @@ export function PostEditorProvider({
     [],
   );
 
-  const saveDraft = useCallback((draft: Post) => {
-    localStorage.setItem(`${draft.id}:${Date.now()}`, draft.body);
+  const saveDraft = useCallback(
+    (draft: Post) => {
+      localStorage.setItem(`${draft.id}:${Date.now()}`, draft.body);
 
-    const keys: string[] = [];
+      const keys: string[] = [];
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
 
-      if (key && key.startsWith(draft.id)) {
-        keys.push(key);
+        if (key && key.startsWith(draft.id)) {
+          keys.push(key);
+        }
       }
-    }
 
-    keys.sort((a, b) => b.localeCompare(a));
-    keys.slice(10).forEach((key) => localStorage.removeItem(key));
+      keys.sort((a, b) => b.localeCompare(a));
+      keys.slice(10).forEach((key) => localStorage.removeItem(key));
 
-    return fetch('/api/post', {
-      method: 'POST',
-      body: JSON.stringify({ id: draft.id, body: draft.body }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-  }, []);
+      return fetch('/api/post', {
+        method: 'POST',
+        body: JSON.stringify({ id: draft.id, body: draft.body }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+        .then((response) => response.text())
+        .then((json) => setPost(superjson.parse(json)));
+    },
+    [setPost],
+  );
 
   useEffect(() => {
     const interval = setTimeout(() => {

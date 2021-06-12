@@ -17,13 +17,15 @@ interface DashboardProps {
 export const getServerSideProps = createGetServerSideProps<DashboardProps>(
   async (context) => {
     const user = await authGuard(context);
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      orderBy: { updatedAt: 'desc' },
+    });
 
     return { props: { user, posts } };
   },
 );
 
-function Dashboard({ user, posts }: DashboardProps) {
+function Dashboard({ posts }: DashboardProps) {
   return (
     <AdminContainer>
       <header className="p-4 flex items-center w-full">

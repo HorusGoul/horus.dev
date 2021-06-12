@@ -9,6 +9,7 @@ import PostStatePill from '@/components/post-state-pill';
 import PostCard from '@/components/post-card';
 import AdminContainer from '@/components/admin-container';
 import { useAuth } from '@/utils/useAuth';
+import Head from 'next/head';
 
 interface DashboardProps {
   user: User;
@@ -31,6 +32,10 @@ function Dashboard({ posts }: DashboardProps) {
 
   return (
     <AdminContainer>
+      <Head>
+        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+        <title>🛠️ Dashboard</title>
+      </Head>
       <header className="p-4 flex items-center w-full">
         <h1 className="text-3xl">Posts</h1>
 

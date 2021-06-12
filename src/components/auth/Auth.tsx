@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/supabaseClient';
 import Header from '../header';
+import Head from 'next/head';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,11 @@ export default function Auth() {
 
   return (
     <>
+      <Head>
+        {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+        <title>🛡️ Login</title>
+      </Head>
+
       <Header title="admin" />
 
       <form

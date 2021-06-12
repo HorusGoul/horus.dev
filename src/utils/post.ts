@@ -22,9 +22,9 @@ export function getPostState(
   if (date) {
     if (date.getTime() <= Date.now()) {
       state = 'published';
+    } else {
+      state = 'scheduled';
     }
-
-    state = 'scheduled';
   } else {
     state = 'draft';
   }

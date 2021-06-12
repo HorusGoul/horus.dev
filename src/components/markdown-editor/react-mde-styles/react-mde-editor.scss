@@ -7,10 +7,10 @@
     width: 100%;
     border: 0;
     vertical-align: top;
-    resize: vertical;
-    overflow-y: auto;
+    resize: none;
+    overflow-y: hidden;
+    height: 1em;
 
-    @apply p-4 rounded-lg bg-gray-100 min-h-screen mb-72 transition-colors duration-200 
-      focus:ring-0 focus:bg-gray-200 outline-none font-mono;
+    @apply outline-none font-mono bg-transparent;
   }
 }

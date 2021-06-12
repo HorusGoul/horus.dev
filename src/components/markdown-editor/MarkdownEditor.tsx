@@ -1,12 +1,5 @@
 import { usePostEditor } from '@/contexts/post-editor';
-import React, {
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import ReactMde from 'react-mde';
 import styles from './react-mde-styles/react-mde-all.module.scss';
 import PostRenderer from '../post-renderer';
@@ -56,7 +49,7 @@ async function generateMarkdownPreview(
 }
 
 function MarkdownEditor() {
-  const { draft, updateDraft } = usePostEditor();
+  const { draft, updateDraft, uploadImage } = usePostEditor();
   const [tab, setTab] = useState<'write' | 'preview'>('write');
 
   return (
@@ -68,6 +61,9 @@ function MarkdownEditor() {
       generateMarkdownPreview={generateMarkdownPreview}
       classes={{ reactMde: styles.markdownEditor }}
       textAreaComponent={ResizableTextarea}
+      paste={{
+        saveImage: uploadImage,
+      }}
     />
   );
 }
@@ -119,7 +115,7 @@ const ResizableTextarea = forwardRef<
 
   return (
     <div
-      className="p-4 rounded-lg bg-gray-100 mb-72 transition-colors duration-200 
+      className="p-4 rounded-lg bg-gray-100 transition-colors duration-200 
     focus-within:ring-0 focus-within:bg-gray-200 outline-none font-mono"
     >
       <textarea

@@ -4,7 +4,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 
@@ -14,6 +13,7 @@ interface PostEditorContext {
   updateDraft: (
     partial: Partial<Pick<Post, 'title' | 'body' | 'publishedAt'>>,
   ) => void;
+  uploadImage: (data: ArrayBuffer) => AsyncGenerator<string, boolean, unknown>;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -59,8 +59,16 @@ export function PostEditorProvider({
     };
   }, [draft, saveDraft]);
 
+  const uploadImage = useCallback(async function* (data: ArrayBuffer) {
+    yield 'https://placeimg.com/200/200';
+
+    return true;
+  }, []);
+
   return (
-    <PostEditorContext.Provider value={{ post, draft, updateDraft }}>
+    <PostEditorContext.Provider
+      value={{ post, draft, updateDraft, uploadImage }}
+    >
       {children}
     </PostEditorContext.Provider>
   );

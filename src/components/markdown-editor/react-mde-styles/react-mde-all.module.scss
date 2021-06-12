@@ -4,6 +4,8 @@
   &:global(.react-mde) {
     border-radius: $mde-border-radius;
 
+    @apply pb-72;
+
     :global {
       @import 'react-mde-toolbar.scss';
       @import 'react-mde-editor.scss';

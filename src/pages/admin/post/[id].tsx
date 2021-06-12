@@ -70,14 +70,12 @@ export default function PostEditor({ post }: PostEditorProps) {
     <AdminContainer>
       <header className="p-4 flex items-center w-full">
         <Link href="/admin/dashboard">
-          <a className="flex items-center px-4 py-2 bg-gray-400 text-gray-800 font-semibold rounded-full hover:opacity-90 active:opacity-70">
-            <MdArrowBack />
-
-            <span className="ml-2">Back</span>
+          <a className="flex items-center p-2 bg-gray-400 text-gray-800 font-semibold rounded-full hover:opacity-90 active:opacity-70">
+            <MdArrowBack aria-label="Back" />
           </a>
         </Link>
 
-        <span className="text-2xl ml-4">Post Editor</span>
+        <span className="text-xl ml-4">Post Editor</span>
 
         <div className="ml-auto">
           <PostStatePill state={state} />

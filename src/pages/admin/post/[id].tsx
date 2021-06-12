@@ -9,7 +9,6 @@ import { ParsedUrlQuery } from 'querystring';
 import { MdArrowBack } from 'react-icons/md';
 import AdminContainer from '@/components/admin-container';
 import MarkdownEditor from '@/components/markdown-editor';
-import { useState } from 'react';
 import { PostEditorProvider } from '@/contexts/post-editor';
 
 interface PostEditorParams extends ParsedUrlQuery {
@@ -29,7 +28,18 @@ export const getServerSideProps = createGetServerSideProps<
 
   if (id === 'new') {
     const post = await prisma.post.create({
-      data: { slug: `untitled-${Date.now()}` },
+      data: {
+        slug: `untitled-${Date.now()}`,
+        title: 'Untitled',
+        body: `---
+title: Untitled
+description: Lorem ipsum dolor.
+tags: []
+publishedAt: null
+ogImage: null
+---
+`,
+      },
     });
 
     return {

@@ -38,7 +38,11 @@ async function generateMarkdownPreview(
       throw new Error(await response.text());
     }
 
-    return <PostRenderer {...json} />;
+    return (
+      <div className="py-8">
+        <PostRenderer {...json} />
+      </div>
+    );
   } catch (e) {
     return (
       <>

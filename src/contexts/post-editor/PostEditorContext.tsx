@@ -1,5 +1,12 @@
 import { Post } from '.prisma/client';
-import { createContext, useCallback, useContext, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 interface PostEditorContext {
   post: Post;
@@ -30,6 +37,27 @@ export function PostEditorProvider({
     },
     [],
   );
+
+  const saveDraft = useCallback((draft: Post) => {
+    return fetch('/api/post', {
+      method: 'POST',
+      body: JSON.stringify({ id: draft.id, body: draft.body }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      saveDraft(draft);
+    }, 1000);
+
+    return () => {
+      clearTimeout(interval);
+    };
+  }, [draft, saveDraft]);
 
   return (
     <PostEditorContext.Provider value={{ post, draft, updateDraft }}>

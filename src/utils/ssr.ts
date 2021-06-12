@@ -1,4 +1,9 @@
-import { GetServerSideProps, GetServerSidePropsResult, Redirect } from 'next';
+import {
+  GetServerSideProps,
+  GetServerSidePropsResult,
+  NextApiHandler,
+  Redirect,
+} from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 class ServerSideResult<
@@ -42,4 +47,34 @@ export function createGetServerSideProps<
       throw e;
     }
   }) as F;
+}
+
+class ApiResult {}
+
+export function createApiHandler<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends any = any,
+  H extends NextApiHandler<T> = NextApiHandler<T>,
+>(func: H): H {
+  return (async (req, res) => {
+    try {
+      await func(req, res);
+    } catch (e) {
+      if (e instanceof Error) {
+        const error: Record<string, unknown> = {
+          message: e.message,
+        };
+
+        return res.status(500).send(error as T);
+      }
+
+      if (e instanceof ApiResult) {
+        return;
+      }
+    }
+  }) as H;
+}
+
+export function endApiHandler() {
+  return new ApiResult();
 }

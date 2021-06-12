@@ -1,5 +1,14 @@
 import readingTime from 'reading-time';
 
+export interface PostFrontmatter {
+  title?: string | null;
+  slug?: string | null;
+  description?: string | null;
+  tags?: string[];
+  publishedAt?: string | null;
+  ogImage?: string | null;
+}
+
 export type PostState = 'draft' | 'published' | 'scheduled';
 
 export function getPostState(

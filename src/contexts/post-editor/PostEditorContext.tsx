@@ -42,6 +42,21 @@ export function PostEditorProvider({
   );
 
   const saveDraft = useCallback((draft: Post) => {
+    localStorage.setItem(`${draft.id}:${Date.now()}`, draft.body);
+
+    const keys: string[] = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      if (key && key.startsWith(draft.id)) {
+        keys.push(key);
+      }
+    }
+
+    keys.sort((a, b) => b.localeCompare(a));
+    keys.slice(10).forEach((key) => localStorage.removeItem(key));
+
     return fetch('/api/post', {
       method: 'POST',
       body: JSON.stringify({ id: draft.id, body: draft.body }),

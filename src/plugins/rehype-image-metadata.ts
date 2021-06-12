@@ -7,6 +7,7 @@ import { Node } from 'unist';
 import visit from 'unist-util-visit';
 import { promisify } from 'util';
 import https from 'https';
+import http from 'http';
 
 const sizeOf = promisify(imageSize);
 
@@ -49,7 +50,9 @@ async function addMetadata(node: ImageNode): Promise<void> {
     const options = new URL(node.properties.src);
 
     res = await new Promise((resolve, reject) => {
-      https.get(options, (response) => {
+      const protocol = options.protocol.includes('https') ? https : http;
+
+      protocol.get(options, (response) => {
         const chunks: Uint8Array[] = [];
 
         response.on('data', (chunk) => chunks.push(chunk));
@@ -86,6 +89,10 @@ export default function imageMetadata(this: Processor) {
     });
 
     for (const node of imgNodes) {
+      if (node.properties.src === '') {
+        continue;
+      }
+
       await addMetadata(node);
     }
 

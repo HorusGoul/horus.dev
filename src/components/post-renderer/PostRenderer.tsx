@@ -11,6 +11,14 @@ const components = {
     title,
     ...rest
   }: ImageProps) {
+    if (!src) {
+      return (
+        <p className="border-red-500 p-4 border-4 bg-red-200">
+          img without <code>`src`</code> property
+        </p>
+      );
+    }
+
     return (
       <figure>
         <NextImage

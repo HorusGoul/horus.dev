@@ -13,7 +13,10 @@ interface PostEditorContext {
   updateDraft: (
     partial: Partial<Pick<Post, 'title' | 'body' | 'publishedAt'>>,
   ) => void;
-  uploadImage: (data: ArrayBuffer) => AsyncGenerator<string, boolean, unknown>;
+  uploadImage: (
+    data: ArrayBuffer,
+    file: Blob,
+  ) => AsyncGenerator<string, boolean, unknown>;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -59,11 +62,39 @@ export function PostEditorProvider({
     };
   }, [draft, saveDraft]);
 
-  const uploadImage = useCallback(async function* (data: ArrayBuffer) {
-    yield 'https://placeimg.com/200/200';
+  const uploadImage = useCallback(async function* (
+    data: ArrayBuffer,
+    file: Blob,
+  ) {
+    let response = await fetch('/api/upload', {
+      method: 'POST',
+      body: JSON.stringify({ contentType: file.type }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+
+    if (response.status !== 200) {
+      return false;
+    }
+
+    const json: { uploadUrl: string; url: string } = await response.json();
+
+    response = await fetch(json.uploadUrl, {
+      method: 'PUT',
+      body: file,
+    });
+
+    if (response.status !== 200) {
+      return false;
+    }
+
+    yield json.url;
 
     return true;
-  }, []);
+  },
+  []);
 
   return (
     <PostEditorContext.Provider

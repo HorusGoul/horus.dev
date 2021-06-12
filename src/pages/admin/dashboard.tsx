@@ -8,6 +8,7 @@ import { getPostCardDetails, getPostState } from '@/utils/post';
 import PostStatePill from '@/components/post-state-pill';
 import PostCard from '@/components/post-card';
 import AdminContainer from '@/components/admin-container';
+import { useAuth } from '@/utils/useAuth';
 
 interface DashboardProps {
   user: User;
@@ -26,6 +27,8 @@ export const getServerSideProps = createGetServerSideProps<DashboardProps>(
 );
 
 function Dashboard({ posts }: DashboardProps) {
+  useAuth();
+
   return (
     <AdminContainer>
       <header className="p-4 flex items-center w-full">

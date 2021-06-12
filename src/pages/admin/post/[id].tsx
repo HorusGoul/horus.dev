@@ -10,6 +10,7 @@ import { MdArrowBack } from 'react-icons/md';
 import AdminContainer from '@/components/admin-container';
 import MarkdownEditor from '@/components/markdown-editor';
 import { PostEditorProvider } from '@/contexts/post-editor';
+import { useAuth } from '@/utils/useAuth';
 
 interface PostEditorParams extends ParsedUrlQuery {
   id: string;
@@ -64,6 +65,7 @@ ogImage: null
 });
 
 export default function PostEditor({ post }: PostEditorProps) {
+  useAuth();
   const state = getPostState(post);
 
   return (

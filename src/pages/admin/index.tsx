@@ -1,31 +1,11 @@
 import Auth from '@/components/auth';
-import { supabase } from '@/supabaseClient';
-import { Session } from '@supabase/supabase-js';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useAuth } from '@/utils/useAuth';
 
 function Admin() {
-  const [session, setSession] = useState<Session | null | 'loading'>('loading');
   const router = useRouter();
-
-  useEffect(() => {
-    setSession(supabase.auth.session());
-
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-
-      fetch('/api/auth', {
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
-        credentials: 'same-origin',
-        body: JSON.stringify({ event, session }),
-      }).then((res) => res.json());
-    });
-
-    return () => {
-      data?.unsubscribe();
-    };
-  }, []);
+  const session = useAuth();
 
   useEffect(() => {
     if (session) {

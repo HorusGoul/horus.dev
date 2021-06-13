@@ -19,6 +19,10 @@ export function useAuth() {
   }, []);
 
   useEffect(() => {
+    if (!session) {
+      return;
+    }
+
     fetch('/api/auth', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),

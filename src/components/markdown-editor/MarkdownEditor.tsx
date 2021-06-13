@@ -3,6 +3,7 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import ReactMde from 'react-mde';
 import styles from './react-mde-styles/react-mde-all.module.scss';
 import PostRenderer from '../post-renderer';
+import { Post } from '.prisma/client';
 
 interface MdxEndpointResult {
   code: string;
@@ -14,6 +15,7 @@ interface MdxEndpointResult {
 
 async function generateMarkdownPreview(
   source: string,
+  post: Post,
 ): Promise<React.ReactNode> {
   try {
     const response = await fetch('/api/mdx', {
@@ -33,7 +35,7 @@ async function generateMarkdownPreview(
 
     return (
       <div className="py-8">
-        <PostRenderer {...json} />
+        <PostRenderer post={post} {...json} />
       </div>
     );
   } catch (e) {
@@ -58,7 +60,9 @@ function MarkdownEditor() {
       onChange={(body) => updateDraft({ body })}
       selectedTab={tab}
       onTabChange={setTab}
-      generateMarkdownPreview={generateMarkdownPreview}
+      generateMarkdownPreview={(source) =>
+        generateMarkdownPreview(source, draft)
+      }
       classes={{ reactMde: styles.markdownEditor }}
       textAreaComponent={ResizableTextarea}
       paste={{

@@ -1,7 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 import { bundleMdx } from '@/mdx';
 import React from 'react';
-import Header from '@/components/header';
 import PostRenderer from '@/components/post-renderer';
 import { getPostState, PostFrontmatter } from '@/utils/post';
 import Head from 'next/head';
@@ -10,20 +9,23 @@ import { authGuard } from '@/utils/auth-guard';
 import { createGetServerSideProps, RedirectResult } from '@/utils/ssr';
 import MiniHeader from '@/components/mini-header';
 import SubpageContainer from '@/components/subpage-container';
+import { Post } from '.prisma/client';
+import Footer from '@/components/footer';
 
-interface PostProps {
+interface PostPageProps {
   slug: string;
   code: string;
   frontmatter: PostFrontmatter;
+  post: Post;
 }
 
-interface PostQueryParams extends ParsedUrlQuery {
+interface PostPageQueryParams extends ParsedUrlQuery {
   slug: string;
 }
 
 export const getServerSideProps = createGetServerSideProps<
-  PostProps,
-  PostQueryParams
+  PostPageProps,
+  PostPageQueryParams
 >(async (context) => {
   const slug = context.params?.slug ?? '';
 
@@ -57,12 +59,13 @@ export const getServerSideProps = createGetServerSideProps<
   return {
     props: {
       slug,
+      post,
       ...bundleMdxResult,
     },
   };
 });
 
-export default function Post({ code, frontmatter }: PostProps) {
+export default function PostPage({ code, frontmatter, post }: PostPageProps) {
   const title = frontmatter.title ?? '';
   const slug = frontmatter.slug ?? '';
   const ogImage = frontmatter.ogImage ?? '/images/og/image.png';
@@ -98,7 +101,11 @@ export default function Post({ code, frontmatter }: PostProps) {
       <SubpageContainer>
         <MiniHeader />
 
-        <PostRenderer code={code} frontmatter={frontmatter} />
+        <PostRenderer post={post} code={code} frontmatter={frontmatter} />
+
+        <div className="max-w-5xl mx-auto my-0 pt-24 pb-12">
+          <Footer />
+        </div>
       </SubpageContainer>
     </div>
   );

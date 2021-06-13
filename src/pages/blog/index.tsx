@@ -32,11 +32,31 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
   return { props: { posts }, revalidate: 60 };
 };
 
+const META_TITLE = `Blog | Horus Lugo`;
+const META_BIO = `Here's where you can find my latest publications about my projects, tutorials, and stuff from various topics, focusing on web development.`;
+
 export default function Blog({ posts }: BlogProps) {
   return (
     <>
       <Head>
-        <title>Blog | Horus Lugo</title>
+        <title>{META_TITLE} </title>
+        <meta name="title" content={META_TITLE} />
+        <meta name="description" content={META_BIO} />
+        <link rel="canonical" href="https://horus.dev/blog" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://horus.dev/blog" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_BIO} />
+        <meta property="og:image" content="/images/og/image.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://horus.dev/blog" />
+        <meta property="twitter:title" content={META_TITLE} />
+        <meta property="twitter:description" content={META_BIO} />
+        <meta property="twitter:image" content="/images/og/image.png" />
       </Head>
 
       <Header

@@ -27,6 +27,7 @@ export default function Auth() {
       <Head>
         {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <title>🛡️ Login</title>
+        <meta name="robots" content="noindex" />
       </Head>
 
       <Header title="admin" />

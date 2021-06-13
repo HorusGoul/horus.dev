@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /blog
+Allow: /blog/*
+Disallow: /blog/__post-og-image
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
 Host: https://horus.dev

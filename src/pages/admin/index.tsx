@@ -39,6 +39,7 @@ function Admin() {
       <>
         <Head>
           <title>Loading...</title>
+          <meta name="robots" content="noindex" />
         </Head>
         Loading...
       </>
@@ -57,6 +58,7 @@ function Admin() {
     <>
       <Head>
         <title>Loading...</title>
+        <meta name="robots" content="noindex" />
       </Head>
     </>
   );

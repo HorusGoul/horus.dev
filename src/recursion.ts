@@ -44,7 +44,10 @@ export function useRecursion() {
             );
           });
 
-        console.log('%c🦈🐬🎣 - 🎥🎉 - 🕸️⚛️ - 🇿1️⃣ - 📍', `font-size: 2rem`);
+        console.log(
+          '%c🦈🐬🎣 - 🎥🎉 - 🕸️⚛️ - 🇿1️⃣ - ✈️💲 - 📍',
+          `font-size: 2rem`,
+        );
       }
     }
   }, [recursionCount]);

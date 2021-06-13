@@ -13,7 +13,7 @@ const bgColorMap: Record<PostState, string> = {
 function PostStatePill({ state }: PostStatePillProps) {
   return (
     <div
-      className={`px-4 py-1 w-24 text-center font-semibold ${bgColorMap[state]} text-white rounded-full text-sm`}
+      className={`px-4 py-1 w-24 h-8 inline-flex items-center justify-center font-semibold ${bgColorMap[state]} text-white rounded-full text-sm`}
     >
       {state}
     </div>

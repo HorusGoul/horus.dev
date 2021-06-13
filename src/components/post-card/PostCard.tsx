@@ -6,9 +6,15 @@ export interface PostCardProps {
   href: string;
   title: React.ReactNode;
   details: React.ReactNode;
+  heading?: React.ElementType;
 }
 
-function PostCard({ href, title, details }: PostCardProps) {
+function PostCard({
+  href,
+  title,
+  details,
+  heading: Heading = 'h3',
+}: PostCardProps) {
   return (
     <Link href={href} passHref={true}>
       <a
@@ -20,9 +26,9 @@ function PostCard({ href, title, details }: PostCardProps) {
           'focus:text-black focus:shadow-lg hover:md:shadow-xl',
         )}
       >
-        <h3 className="font-bold tracking-wide text-lg xsm:text-2xl md:text-3xl">
+        <Heading className="font-bold tracking-wide text-lg xsm:text-2xl md:text-3xl">
           {title}
-        </h3>
+        </Heading>
 
         <span className="block tracking-wide pt-2 font-light text-md xsm:text-lg xsm:pt-4 md:pt-6 md:text-xl">
           {details}

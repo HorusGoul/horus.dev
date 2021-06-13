@@ -59,6 +59,7 @@ export default function Blog({ posts }: BlogProps) {
                   title={post.title}
                   href={`/blog/${post.slug}`}
                   details={details}
+                  heading="h2"
                 />
               );
             })}

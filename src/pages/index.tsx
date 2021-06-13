@@ -56,12 +56,12 @@ export default function Home({ articles }: HomeProps) {
       <Container>
         <div className="w-full md:flex md:items-center md:flex-row">
           <div className="inline-block text-left md:flex-1 md:block">
-            <h2 className="font-medium text-3xl xsm:text-4xl md:text-6xl">
+            <h1 className="font-medium text-3xl xsm:text-4xl md:text-6xl">
               Horus Lugo
-            </h2>
-            <h2 className="font-bold font-mono w-40 text-purple-600 text-2xl sm:w-auto md:text-4xl">
+            </h1>
+            <span className="font-bold font-mono w-40 text-purple-600 text-2xl sm:w-auto md:text-4xl">
               Full Stack Engineer
-            </h2>
+            </span>
           </div>
 
           <picture className="rounded-full overflow-hidden shadow-xl float-right h-20 w-20 xsm:w-32 xsm:h-32 md:float-none md:w-48 md:h-48 lg:w-64 lg:h-64 ">
@@ -95,9 +95,9 @@ export default function Home({ articles }: HomeProps) {
         </p>
 
         <div className="pt-16 md:pt-24">
-          <h3 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">
+          <h2 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">
             Where to find me
-          </h3>
+          </h2>
 
           <Social className="pt-4 -mx-6 max-w-5xl sm:mx-0 md:pt-6" />
         </div>

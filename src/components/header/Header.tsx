@@ -17,33 +17,6 @@ function Header({
   description,
   subtitle,
 }: HeaderProps) {
-  if (false) {
-    return (
-      <header className="py-8">
-        <SubpageContainer>
-          <nav className="h-16 sm:h-32 flex items-center my-0 mx-auto">
-            <Link href={goBackHref} passHref={true}>
-              <a href="/mock" className="flex group" aria-label="Go back home">
-                <div className="h-16 w-16 rounded-full overflow-hidden mr-4 group-hover:shadow-lg transition-shadow duration-200">
-                  <Image
-                    src="/images/avatar/lg.jpg"
-                    width={64}
-                    height={64}
-                    aria-hidden="true"
-                    alt="My Avatar"
-                  />
-                </div>
-                <div className="flex items-center text-3xl xsm:text-4xl font-medium group-hover:opacity-80 transition-opacity duration-200">
-                  {title}
-                </div>
-              </a>
-            </Link>
-          </nav>
-        </SubpageContainer>
-      </header>
-    );
-  }
-
   return (
     <Container>
       <header>
@@ -58,15 +31,17 @@ function Header({
               ) : (
                 <>
                   by&nbsp;
-                  <code className="bg-gray-200 rounded-md font-bold text-gray-800 text-xl p-1 xsm:mx-1 md:text-3xl">
-                    Horus Lugo
-                  </code>
+                  <Link href={goBackHref}>
+                    <a className="bg-gray-200 rounded-md font-bold text-gray-800 text-xl p-1 xsm:mx-1 md:text-3xl hover:opacity-90 active:opacity-80">
+                      Horus Lugo
+                    </a>
+                  </Link>
                 </>
               )}
             </span>
           </div>
 
-          <div className="rounded-full overflow-hidden shadow-xl float-right h-20 w-20 xsm:w-32 xsm:h-32 md:float-none ">
+          <div className="rounded-full overflow-hidden shadow-xl float-right h-20 w-20 xsm:w-32 xsm:h-32 md:float-none">
             <Image
               layout="responsive"
               width={256}

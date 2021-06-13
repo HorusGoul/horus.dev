@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-type AdminContainerProps = React.HTMLAttributes<HTMLDivElement>;
+type SubpageContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
-function AdminContainer({ className, ...props }: AdminContainerProps) {
+function SubpageContainer({ className, ...props }: SubpageContainerProps) {
   return (
     <div
       className={classNames(
@@ -14,4 +14,4 @@ function AdminContainer({ className, ...props }: AdminContainerProps) {
   );
 }
 
-export default AdminContainer;
+export default SubpageContainer;

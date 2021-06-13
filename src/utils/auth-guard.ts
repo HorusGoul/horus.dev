@@ -13,6 +13,7 @@ export async function authGuard(
   const { user, error } = await supabase.auth.api.getUserByCookie(context.req);
 
   if (error || !user) {
+    console.log(error, user);
     throw new RedirectResult({ destination: '/admin', permanent: false });
   }
 

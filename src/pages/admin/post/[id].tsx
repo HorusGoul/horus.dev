@@ -7,7 +7,7 @@ import { createGetServerSideProps } from '@/utils/ssr';
 import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import { MdArrowBack, MdOpenInNew } from 'react-icons/md';
-import AdminContainer from '@/components/admin-container';
+import SubpageContainer from '@/components/subpage-container';
 import MarkdownEditor from '@/components/markdown-editor';
 import { PostEditorProvider } from '@/contexts/post-editor';
 import { useAuth } from '@/utils/useAuth';
@@ -73,7 +73,7 @@ export default function PostEditor({ post: initialPost }: PostEditorProps) {
   const state = getPostState(post);
 
   return (
-    <AdminContainer>
+    <SubpageContainer>
       <Head>
         {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <title>📝 {post.title}</title>
@@ -105,6 +105,6 @@ export default function PostEditor({ post: initialPost }: PostEditorProps) {
       <PostEditorProvider post={post} setPost={setPost}>
         <MarkdownEditor />
       </PostEditorProvider>
-    </AdminContainer>
+    </SubpageContainer>
   );
 }

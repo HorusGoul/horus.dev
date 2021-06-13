@@ -1,3 +1,13 @@
+.root {
+  @screen md {
+    height: 80px;
+  }
+
+  @screen lg {
+    height: 130px;
+  }
+}
+
 .shapeDivider {
   position: absolute;
   top: 0;

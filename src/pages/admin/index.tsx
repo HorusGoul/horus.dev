@@ -1,10 +1,10 @@
 import Auth from '@/components/auth';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/utils/useAuth';
 import { createGetServerSideProps } from '@/utils/ssr';
 import { authGuard } from '@/utils/auth-guard';
-import AdminContainer from '@/components/admin-container';
+import SubpageContainer from '@/components/subpage-container';
 import Head from 'next/head';
 
 export const getServerSideProps = createGetServerSideProps(async (context) => {
@@ -26,13 +26,13 @@ export const getServerSideProps = createGetServerSideProps(async (context) => {
 
 function Admin() {
   const router = useRouter();
-  const session = useAuth();
+  const [session, cookie] = useAuth();
 
   useEffect(() => {
-    if (session) {
+    if (cookie) {
       router.replace('/admin/dashboard');
     }
-  }, [session, router]);
+  }, [cookie, router]);
 
   if (session === 'loading') {
     return (
@@ -47,9 +47,9 @@ function Admin() {
 
   if (!session) {
     return (
-      <AdminContainer>
+      <SubpageContainer>
         <Auth />
-      </AdminContainer>
+      </SubpageContainer>
     );
   }
 

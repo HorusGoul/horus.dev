@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from './SectionDivider.module.scss';
 
 interface SectionDividerProps {
@@ -8,14 +9,14 @@ interface SectionDividerProps {
 
 function SectionDivider({
   color = '#ffffff',
-  backgroundColor = '#000000',
+  backgroundColor = 'bg-black',
   reverse = false,
 }: SectionDividerProps) {
   return (
-    <div className="relative">
+    <div className={classNames('relative', styles.root)}>
       <div
-        className={styles.shapeDivider}
-        style={{ backgroundColor, transform: reverse ? 'unset' : undefined }}
+        className={classNames(styles.shapeDivider, backgroundColor)}
+        style={{ transform: reverse ? 'unset' : undefined }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Social from '@/components/social';
 import PostCard from '@/components/post-card';
-import { BsArrowRight, BsHeartFill } from 'react-icons/bs';
+import { BsArrowRight } from 'react-icons/bs';
 import classNames from 'classnames';
 import CodeTag from '@/components/code-tag';
 import { theme } from '@/../tailwind.config.js';
@@ -10,8 +10,7 @@ import { GetStaticProps } from 'next';
 import { Article, fetchArticles } from '@/model/article';
 import ProjectCard from '@/components/project-card';
 import SectionDivider from '@/components/section-divider';
-import { RiExternalLinkLine } from 'react-icons/ri';
-import { useRecursion } from '@/recursion';
+import Footer from '@/components/footer';
 
 interface HomeProps {
   articles: Article[];
@@ -31,8 +30,6 @@ const META_TITLE = `Horus Lugo — Full Stack Engineer`;
 const META_BIO = `Building software for fun since 2008 to create websites, apps, games, or whatever I find interesting at the moment. React, Node.js, GraphQL, and TypeScript are part of my preferred stack for developing Full Stack projects.`;
 
 export default function Home({ articles }: HomeProps) {
-  const recursion = useRecursion();
-
   return (
     <>
       <Head>
@@ -163,55 +160,9 @@ export default function Home({ articles }: HomeProps) {
 
       <SectionDivider reverse={true} />
 
-      <div className="pt-12 md:pt-32 pb-4">
-        <Container>
-          <p className="flex flex-col text-gray-900">
-            <span className="text-xl font-medium pb-2">
-              Made with{' '}
-              <BsHeartFill
-                aria-label="Love"
-                className="inline-block text-red-600"
-              />{' '}
-              by{' '}
-              <span
-                tabIndex={0}
-                role="link"
-                onClick={recursion}
-                onKeyDown={recursion}
-                className="outline-none"
-              >
-                me
-              </span>{' '}
-              —{' '}
-              <span className="font-light">
-                Source code available on&nbsp;
-                <a
-                  href="https://github.com/HorusGoul/horus.dev"
-                  className="inline-flex items-center font-normal hover:text-gray-700"
-                >
-                  GitHub
-                  <RiExternalLinkLine
-                    className="ml-1 mb-1 inline-block"
-                    aria-hidden="true"
-                  />
-                </a>
-              </span>
-            </span>
-
-            <span className="font-light mt-2">
-              Follow me on{' '}
-              <a
-                href="https://twitter.com/HorusGoul"
-                className="inline-flex items-center font-normal underline hover:no-underline hover:text-gray-700"
-              >
-                Twitter
-              </a>{' '}
-              if you want to know more about my future articles, projects, or
-              whatever I come up with!
-            </span>
-          </p>
-        </Container>
-      </div>
+      <Container>
+        <Footer />
+      </Container>
     </>
   );
 }

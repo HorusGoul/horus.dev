@@ -7,7 +7,7 @@ import { createGetServerSideProps } from '@/utils/ssr';
 import { getPostCardDetails, getPostState } from '@/utils/post';
 import PostStatePill from '@/components/post-state-pill';
 import PostCard from '@/components/post-card';
-import AdminContainer from '@/components/admin-container';
+import SubpageContainer from '@/components/subpage-container';
 import { useAuth } from '@/utils/useAuth';
 import Head from 'next/head';
 
@@ -31,7 +31,7 @@ function Dashboard({ posts }: DashboardProps) {
   useAuth();
 
   return (
-    <AdminContainer>
+    <SubpageContainer>
       <Head>
         {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
         <title>🛠️ Dashboard</title>
@@ -70,7 +70,7 @@ function Dashboard({ posts }: DashboardProps) {
           );
         })}
       </div>
-    </AdminContainer>
+    </SubpageContainer>
   );
 }
 

@@ -1,6 +1,4 @@
 import { ParsedUrlQuery } from 'querystring';
-import { bundleMdx } from '@/mdx';
-import React from 'react';
 import PostRenderer from '@/components/post-renderer';
 import { getPostState, PostFrontmatter } from '@/utils/post';
 import Head from 'next/head';
@@ -11,10 +9,11 @@ import MiniHeader from '@/components/mini-header';
 import SubpageContainer from '@/components/subpage-container';
 import { Post } from '.prisma/client';
 import Footer from '@/components/footer';
+import React from 'react';
+import Social from '@/components/social';
 
 interface PostPageProps {
   slug: string;
-  code: string;
   frontmatter: PostFrontmatter;
   post: Post;
 }
@@ -54,20 +53,20 @@ export const getServerSideProps = createGetServerSideProps<
     });
   }
 
-  const bundleMdxResult = await bundleMdx(post.body);
+  const frontmatter = post.frontmatter as PostFrontmatter;
 
   return {
     props: {
       slug,
       post,
-      ...bundleMdxResult,
+      frontmatter,
     },
   };
 });
 
-export default function PostPage({ code, frontmatter, post }: PostPageProps) {
-  const title = frontmatter.title ?? '';
-  const slug = frontmatter.slug ?? '';
+export default function PostPage({ frontmatter, post }: PostPageProps) {
+  const title = `${post.title} | Horus Lugo `;
+  const slug = post.slug;
   const ogImage = frontmatter.ogImage ?? '/images/og/image.png';
   const description = frontmatter.description ?? '';
 
@@ -101,9 +100,15 @@ export default function PostPage({ code, frontmatter, post }: PostPageProps) {
       <SubpageContainer>
         <MiniHeader />
 
-        <PostRenderer post={post} code={code} frontmatter={frontmatter} />
+        <PostRenderer post={post} code={post.code} frontmatter={frontmatter} />
 
-        <div className="max-w-5xl mx-auto my-0 pt-24 pb-12">
+        <div className="max-w-5xl mx-auto my-0 pt-16 pb-12">
+          <h2 className="font-light text-gray-800 text-xl xsm:text-2xl sm:text-3xl">
+            Where to find me
+          </h2>
+
+          <Social className="pt-4 -mx-6 max-w-5xl sm:mx-0 md:pt-6" />
+
           <Footer />
         </div>
       </SubpageContainer>

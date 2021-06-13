@@ -44,6 +44,7 @@ export function createGetServerSideProps<
         return e.result;
       }
 
+      console.error(e);
       throw e;
     }
   }) as F;
@@ -64,6 +65,8 @@ export function createApiHandler<
         const error: Record<string, unknown> = {
           message: e.message,
         };
+
+        console.error(e);
 
         return res.status(500).send(error as T);
       }

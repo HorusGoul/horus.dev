@@ -22,7 +22,9 @@ export default createApiHandler(async (req, res) => {
     where: { id },
     data: {
       body: req.body.body,
+      code: result.code,
       title: frontmatter.title ?? 'Untitled',
+      frontmatter: result.frontmatter,
       slug: frontmatter.slug ?? undefined,
       publishedAt: frontmatter.publishedAt
         ? new Date(frontmatter.publishedAt)

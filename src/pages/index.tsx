@@ -7,29 +7,44 @@ import CodeTag from '@/components/code-tag';
 import { theme } from '@/../tailwind.config.js';
 import Container from '@/components/container';
 import { GetStaticProps } from 'next';
-import { Article, fetchArticles } from '@/model/article';
 import ProjectCard from '@/components/project-card';
 import SectionDivider from '@/components/section-divider';
 import Footer from '@/components/footer';
+import Link from 'next/link';
+import { Post } from '@prisma/client';
+import prisma from '@/prisma';
+import { getPostCardDetails } from '@/utils/post';
 
 interface HomeProps {
-  articles: Article[];
+  posts: Post[];
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const articles = await fetchArticles('horusgoul');
+  const posts = await prisma.post.findMany({
+    where: {
+      publishedAt: {
+        not: {
+          equals: null,
+          gt: new Date(),
+        },
+      },
+    },
+    orderBy: { publishedAt: 'desc' },
+    take: 3,
+  });
 
   return {
     props: {
-      articles,
+      posts,
     },
+    revalidate: 60,
   };
 };
 
 const META_TITLE = `Horus Lugo — Full Stack Engineer`;
 const META_BIO = `Building software for fun since 2008 to create websites, apps, games, or whatever I find interesting at the moment. React, Node.js, GraphQL, and TypeScript are part of my preferred stack for developing Full Stack projects.`;
 
-export default function Home({ articles }: HomeProps) {
+export default function Home({ posts }: HomeProps) {
   return (
     <>
       <Head>
@@ -109,25 +124,31 @@ export default function Home({ articles }: HomeProps) {
         </h2>
 
         <div className="py-4 p grid -mx-6 gap-4 xsm:gap-8 sm:mx-0 md:pt-6">
-          {articles.map(({ id, url, title, details }) => (
-            <PostCard key={id} href={url} title={title} details={details} />
+          {posts.map(({ id, slug, title, ...post }) => (
+            <PostCard
+              key={id}
+              href={`/blog/${slug}`}
+              title={title}
+              details={getPostCardDetails(post)}
+            />
           ))}
 
           <div className="flex justify-center">
-            <a
-              href="https://dev.to/horusgoul"
-              className={classNames(
-                'flex items-center bg-black rounded-full px-8 py-2 shadow-none',
-                'text-white text-center text-lg font-bold',
-                'cursor-pointer select-none',
-                'transition-color-shadow duration-200 ease-linear',
-                'hover:shadow-xl hover:bg-gray-800 hover:text-gray-100',
-                'focus:shadow-xl focus:bg-gray-800 focus:text-gray-100',
-              )}
-            >
-              <span className="pr-4">More articles</span>{' '}
-              <BsArrowRight className="text-3xl" />
-            </a>
+            <Link href="/blog">
+              <a
+                className={classNames(
+                  'flex items-center bg-black rounded-full px-8 py-2 shadow-none',
+                  'text-white text-center text-lg font-bold',
+                  'cursor-pointer select-none',
+                  'transition-color-shadow duration-200 ease-linear',
+                  'hover:shadow-xl hover:bg-gray-800 hover:text-gray-100',
+                  'focus:shadow-xl focus:bg-gray-800 focus:text-gray-100',
+                )}
+              >
+                <span className="pr-4">More articles</span>{' '}
+                <BsArrowRight className="text-3xl" aria-hidden="true" />
+              </a>
+            </Link>
           </div>
         </div>
       </Container>

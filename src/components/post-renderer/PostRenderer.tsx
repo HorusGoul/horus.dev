@@ -172,6 +172,8 @@ function PostRenderer({ code, frontmatter, post }: PostRendererProps) {
             <li key={site.type}>
               <a
                 href={createShareLink(site.type)}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-block text-gray-800 font-bold p-1 bg-gray-200 rounded-md hover:bg-gray-300"
               >
                 {site.text}

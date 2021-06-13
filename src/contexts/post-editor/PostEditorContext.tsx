@@ -69,8 +69,15 @@ export function PostEditorProvider({
           Accept: 'application/json',
         },
       })
-        .then((response) => response.text())
-        .then((json) => setPost(superjson.parse(json)));
+        .then((response) => {
+          if (response.status === 200) {
+            return response.text();
+          }
+
+          throw new Error(`Couldn't save. Check your markdown and try again.`);
+        })
+        .then((json) => setPost(superjson.parse(json)))
+        .catch((e) => console.error(e.message));
     },
     [setPost],
   );

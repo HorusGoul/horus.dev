@@ -1,0 +1,23 @@
+.root {
+  opacity: 0;
+  transform: translateY(-20%);
+  pointer-events: none;
+
+  &:focus-within,
+  &.open {
+    pointer-events: all;
+    animation: open 180ms ease-in-out forwards;
+  }
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

@@ -8,6 +8,8 @@ import Head from 'next/head';
 import prisma from '@/prisma';
 import { authGuard } from '@/utils/auth-guard';
 import { createGetServerSideProps, RedirectResult } from '@/utils/ssr';
+import MiniHeader from '@/components/mini-header';
+import SubpageContainer from '@/components/subpage-container';
 
 interface PostProps {
   slug: string;
@@ -93,9 +95,11 @@ export default function Post({ code, frontmatter }: PostProps) {
         <meta property="twitter:image" content={ogImage} />
       </Head>
 
-      <Header title="blog" goBackHref="/blog" />
+      <SubpageContainer>
+        <MiniHeader />
 
-      <PostRenderer code={code} frontmatter={frontmatter} />
+        <PostRenderer code={code} frontmatter={frontmatter} />
+      </SubpageContainer>
     </div>
   );
 }

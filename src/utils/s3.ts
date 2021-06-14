@@ -20,6 +20,7 @@ interface AWSGetSignedURLParams {
   ContentType?: string;
   ACL?: string;
   CacheControl?: string;
+  Metadata?: Record<string, unknown>;
 }
 
 export async function createUploadSignedUrl(
@@ -34,6 +35,7 @@ export async function createUploadSignedUrl(
     ContentType: contentType,
     Expires: 60 * 60,
     ACL: 'public-read',
+    CacheControl: 'public, max-age=604800',
   };
 
   const endpoint = getEndpoint();

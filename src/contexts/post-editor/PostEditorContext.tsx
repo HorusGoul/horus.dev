@@ -114,6 +114,9 @@ export function PostEditorProvider({
     response = await fetch(json.uploadUrl, {
       method: 'PUT',
       body: file,
+      headers: {
+        'Cache-Control': 'public, max-age=604800',
+      },
     });
 
     if (response.status !== 200) {

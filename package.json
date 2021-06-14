@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && prisma migrate deploy",
     "start": "next start",
     "typecheck": "tsc",
     "lint:base": "eslint --ext .js,.json,.ts,.tsx",

@@ -4,9 +4,9 @@ export function createS3Client(): AWS.S3 {
   const endpoint = getEndpoint();
 
   return new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
+    accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY,
+    region: process.env.APP_AWS_REGION,
     signatureVersion: 'v4',
     endpoint,
     s3ForcePathStyle: !!endpoint,
@@ -52,11 +52,11 @@ export async function createUploadSignedUrl(
 }
 
 export function getBucket() {
-  return process.env.AWS_S3_BUCKET || '';
+  return process.env.APP_AWS_S3_BUCKET || '';
 }
 
 export function getEndpoint() {
-  return process.env.AWS_S3_ENDPOINT;
+  return process.env.APP_AWS_S3_ENDPOINT;
 }
 
 export function getFileUrlFromId(id: string): string {

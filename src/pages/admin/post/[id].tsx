@@ -30,13 +30,18 @@ export const getServerSideProps = createGetServerSideProps<
   const id = context.params?.id;
 
   if (id === 'new') {
+    const title = `Untitled`;
+    const slug = `untitled-${Date.now()}`;
+    const description = `Lorem ipsum dolor.`;
+
     const post = await prisma.post.create({
       data: {
-        slug: `untitled-${Date.now()}`,
-        title: 'Untitled',
+        slug,
+        title,
         body: `---
-title: Untitled
-description: Lorem ipsum dolor.
+title: ${title}
+slug: ${slug}
+description: ${description}
 tags: []
 publishedAt: null
 ogImage: null

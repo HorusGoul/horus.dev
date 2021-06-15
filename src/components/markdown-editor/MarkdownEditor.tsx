@@ -88,8 +88,10 @@ const ResizableTextarea = forwardRef<
         return;
       }
 
+      const savedScrollY = window.scrollY;
       field.style.height = 'auto';
       field.style.height = field.scrollHeight + 48 + 'px';
+      window.scrollTo({ top: savedScrollY });
     }
 
     function on(event: string, handler: () => void) {

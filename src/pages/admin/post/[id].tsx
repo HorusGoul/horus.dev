@@ -6,7 +6,7 @@ import { getPostState } from '@/utils/post';
 import { createGetServerSideProps } from '@/utils/ssr';
 import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
-import { MdArrowBack, MdOpenInNew } from 'react-icons/md';
+import { MdArrowBack, MdImage, MdOpenInNew } from 'react-icons/md';
 import SubpageContainer from '@/components/subpage-container';
 import MarkdownEditor from '@/components/markdown-editor';
 import { PostEditorProvider } from '@/contexts/post-editor';
@@ -94,6 +94,14 @@ export default function PostEditor({ post: initialPost }: PostEditorProps) {
         <span className="text-xl ml-4">Post Editor</span>
 
         <div className="ml-auto flex gap-2 items-center">
+          {/* eslint-disable-next-line react/jsx-no-target-blank */}
+          <a
+            href={`/api/og-image/blog/__post-og-image.png?id=${post.id}`}
+            className="p-2 bg-gray-400 text-gray-800 rounded-full hover:opacity-90 active:opacity-70"
+            target="_blank"
+          >
+            <MdImage aria-label="Open OG Image" className="h-4 w-auto" />
+          </a>
           {/* eslint-disable-next-line react/jsx-no-target-blank */}
           <a
             href={`/blog/${post.slug}`}

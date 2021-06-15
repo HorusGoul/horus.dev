@@ -24,6 +24,8 @@ const components = {
 
     return (
       <figure>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <NextImage
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore

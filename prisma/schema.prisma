@@ -24,3 +24,9 @@ model Post {
 
   @@unique([slug, publishedAt])
 }
+
+model ImageMetadata {
+  url    String @id
+  width  Int
+  height Int
+}

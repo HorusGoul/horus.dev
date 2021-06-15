@@ -22,8 +22,8 @@ services:
     ports:
       - ${MINIO_PORT}:9000
     environment:
-      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID}
-      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY}
+      MINIO_ACCESS_KEY: ${APP_AWS_ACCESS_KEY_ID}
+      MINIO_SECRET_KEY: ${APP_AWS_SECRET_ACCESS_KEY}
       MINIO_API_CORS_ALLOW_ORIGIN: '*'
     entrypoint: minio server /data
     healthcheck:
@@ -44,10 +44,10 @@ services:
       - -c
       - |
         /usr/bin/mc config host rm local;
-        /usr/bin/mc config host add --quiet --api s3v4 local http://minio:9000 ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY};
-        /usr/bin/mc rb --force local/${AWS_S3_BUCKET}/;
-        /usr/bin/mc mb --quiet local/${AWS_S3_BUCKET}/;
-        /usr/bin/mc policy set public local/${AWS_S3_BUCKET};
+        /usr/bin/mc config host add --quiet --api s3v4 local http://minio:9000 ${APP_AWS_ACCESS_KEY_ID} ${APP_AWS_SECRET_ACCESS_KEY};
+        /usr/bin/mc rb --force local/${APP_AWS_S3_BUCKET}/;
+        /usr/bin/mc mb --quiet local/${APP_AWS_S3_BUCKET}/;
+        /usr/bin/mc policy set public local/${APP_AWS_S3_BUCKET};
     networks:
       - common-network
 

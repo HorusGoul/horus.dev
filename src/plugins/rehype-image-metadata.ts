@@ -8,6 +8,7 @@ import visit from 'unist-util-visit';
 import { promisify } from 'util';
 import https from 'https';
 import http from 'http';
+import prisma from '@/prisma';
 
 const sizeOf = promisify(imageSize);
 
@@ -37,17 +38,31 @@ function isImageNode(node: Node): node is ImageNode {
   );
 }
 
+const localCache: Record<string, { width: number; height: number }> = {};
+
 /**
  * Adds the image's `height` and `width` to it's properties.
  */
 async function addMetadata(node: ImageNode): Promise<void> {
+  const src = node.properties.src;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let res: any;
+  let res: any = localCache[src] || null;
+
+  if (!res) {
+    res = await prisma.imageMetadata.findUnique({ where: { url: src } });
+  }
+
+  if (res) {
+    node.properties.width = res.width;
+    node.properties.height = res.height;
+    return;
+  }
 
   if (node.properties.src.startsWith('/')) {
-    res = await sizeOf(path.join(process.cwd(), 'public', node.properties.src));
+    res = await sizeOf(path.join(process.cwd(), 'public', src));
   } else {
-    const options = new URL(node.properties.src);
+    const options = new URL(src);
 
     res = await new Promise((resolve, reject) => {
       const protocol = options.protocol.includes('https') ? https : http;
@@ -66,9 +81,17 @@ async function addMetadata(node: ImageNode): Promise<void> {
         response.on('error', reject);
       });
     });
+
+    if (res) {
+      await prisma.imageMetadata.create({
+        data: { url: src, height: res.height, width: res.width },
+      });
+    }
   }
 
   if (!res) throw Error(`Invalid image with src "${node.properties.src}"`);
+
+  localCache[src] = { width: res.width, height: res.height };
 
   node.properties.width = res.width;
   node.properties.height = res.height;

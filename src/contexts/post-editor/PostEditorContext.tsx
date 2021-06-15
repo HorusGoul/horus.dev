@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import superjson from 'superjson';
@@ -30,6 +31,8 @@ interface PostEditorProviderProps {
   children: React.ReactNode;
 }
 
+const SAVE_DRAFT_TIMEOUT = 1000;
+
 export function PostEditorProvider({
   children,
   post,
@@ -43,6 +46,8 @@ export function PostEditorProvider({
     },
     [],
   );
+
+  const lastSavePromiseRef = useRef<Promise<unknown> | null>(null);
 
   const saveDraft = useCallback(
     (draft: Post) => {
@@ -61,7 +66,7 @@ export function PostEditorProvider({
       keys.sort((a, b) => b.localeCompare(a));
       keys.slice(10).forEach((key) => localStorage.removeItem(key));
 
-      return fetch('/api/post', {
+      const promise = fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({ id: draft.id, body: draft.body }),
         headers: {
@@ -78,6 +83,14 @@ export function PostEditorProvider({
         })
         .then((json) => setPost(superjson.parse(json)))
         .catch((e) => console.error(e.message));
+
+      if (lastSavePromiseRef.current === null) {
+        lastSavePromiseRef.current = promise;
+      } else {
+        lastSavePromiseRef.current = lastSavePromiseRef.current.finally(
+          () => promise,
+        );
+      }
     },
     [setPost],
   );
@@ -85,7 +98,7 @@ export function PostEditorProvider({
   useEffect(() => {
     const interval = setTimeout(() => {
       saveDraft(draft);
-    }, 1000);
+    }, SAVE_DRAFT_TIMEOUT);
 
     return () => {
       clearTimeout(interval);

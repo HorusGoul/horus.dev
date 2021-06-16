@@ -54,6 +54,20 @@ export default function PostOgImage({ post, frontmatter }: PostPageProps) {
 
   const details = getPostCardDetails(post);
 
+  let titleFontSize = '7rem';
+
+  switch (true) {
+    case title.length > 50:
+      titleFontSize = '5.5rem';
+      break;
+    case title.length > 80:
+      titleFontSize = '4.5rem';
+      break;
+    case title.length > 100:
+      titleFontSize = '3.5rem';
+      break;
+  }
+
   return (
     <>
       <Head>
@@ -71,16 +85,31 @@ export default function PostOgImage({ post, frontmatter }: PostPageProps) {
         }}
         className="w-screen h-screen bg-gray-900 p-24 bg-cover bg-center"
       >
-        <div className="backdrop-filter backdrop-blur-sm bg-black bg-opacity-30 h-full w-full absolute top-0 left-0 z-0" />
-        <div className="bg-white bg-opacity-50 backdrop-filter backdrop-blur-2xl p-24 h-full rounded-3xl shadow-2xl z-10 relative flex flex-col overflow-hidden">
-          <div className="bg-white rounded-2xl p-12">
-            <h1 className="text-6xl font-bold">{title}</h1>
+        <div className="bg-black bg-opacity-10 h-full w-full absolute top-0 left-0 z-0" />
+        <div
+          className="bg-white bg-opacity-50 backdrop-filter backdrop-blur-lg p-12 h-full shadow-2xl z-10 relative flex flex-col overflow-hidden"
+          style={{
+            borderRadius: '4rem',
+          }}
+        >
+          <div className="bg-white p-12" style={{ borderRadius: '3rem' }}>
+            <h1
+              className="font-bold tracking-tight leading-tight"
+              style={{ fontSize: titleFontSize }}
+            >
+              {title}
+            </h1>
 
-            <p className="text-4xl py-8 text-gray-800">{description}</p>
-            <p className="text-4xl italic text-gray-600">{details}</p>
+            <p
+              className="py-8 text-gray-700 tracking-tight leading-snug"
+              style={{ fontSize: '4rem' }}
+            >
+              {description}
+            </p>
+            <p className="text-5xl text-gray-600 text-right">{details}</p>
           </div>
 
-          <div className="mt-auto -mx-24 -mb-24 p-24 flex items-center justify-end gap-8">
+          <div className="mt-auto flex items-center justify-end gap-8">
             <div className="flex items-center bg-white text-black p-4 pr-10 rounded-full">
               <div className="rounded-full overflow-hidden shadow-lg h-24 w-24 mr-6 bg-blue-500 text-white flex items-center justify-center">
                 <RiTwitterFill className="h-16 w-16" />

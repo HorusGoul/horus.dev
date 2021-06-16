@@ -43,6 +43,7 @@
     "mdx-bundler": "^4.0.1",
     "next": "^11.0.0",
     "next-og-image": "^1.1.0",
+    "nextjs-progressbar": "^0.0.10",
     "prism-theme-night-owl": "^1.4.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

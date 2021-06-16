@@ -1,6 +1,8 @@
 import { AppProps } from 'next/app';
 import '../styles/index.scss';
 import Head from 'next/head';
+import NextNprogress from 'nextjs-progressbar';
+import { theme } from '@/../tailwind.config';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const includePlausible = !router.pathname.includes('/__');
@@ -49,6 +51,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         )}
         <script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</script>
       </Head>
+
+      <NextNprogress
+        color={theme.colors.purple[500]}
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={4}
+      />
+
       <Component {...pageProps} />
     </>
   );

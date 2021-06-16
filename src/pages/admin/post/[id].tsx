@@ -13,6 +13,7 @@ import { PostEditorProvider } from '@/contexts/post-editor';
 import { useAuth } from '@/utils/useAuth';
 import { useState } from 'react';
 import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
 
 interface PostEditorParams extends ParsedUrlQuery {
   id: string;
@@ -118,6 +119,8 @@ export default function PostEditor({ post: initialPost }: PostEditorProps) {
       <PostEditorProvider post={post} setPost={setPost}>
         <MarkdownEditor />
       </PostEditorProvider>
+
+      <Toaster />
     </SubpageContainer>
   );
 }

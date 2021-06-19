@@ -1,6 +1,6 @@
-import { apiAuthGuard } from '../src/utils/auth-guard';
-import { createUploadSignedUrl, getFileUrlFromId } from '../src/utils/s3';
-import { createApiHandler } from '../src/utils/ssr';
+import { apiAuthGuard } from '@/utils/auth-guard';
+import { createUploadSignedUrl, getFileUrlFromId } from '@/utils/s3';
+import { createApiHandler } from '@/utils/ssr';
 import { v4 as uuid } from 'uuid';
 
 export default createApiHandler(async (req, res) => {

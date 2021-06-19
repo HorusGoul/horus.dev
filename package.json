@@ -84,5 +84,9 @@
     "sass": "^1.34.1",
     "tailwindcss": "^2.1.4",
     "typescript": "^4.3.2"
+  },
+  "resolutions": {
+    "chrome-aws-lambda": "^9.1.0",
+    "puppeteer-core": "^9.1.0"
   }
 }

@@ -2,11 +2,11 @@
   "redirects": [
     {
       "source": "/minecraft-mod-java-fabric-guide",
-      "destination": "https://dev.to/horusgoul/creating-a-minecraft-mod-using-java-and-fabric-3bmo"
+      "destination": "/blog/creating-a-minecraft-mod-using-java-and-fabric"
     },
     {
       "source": "/minecraft-mod-java-fabric-guide/",
-      "destination": "https://dev.to/horusgoul/creating-a-minecraft-mod-using-java-and-fabric-3bmo"
+      "destination": "/blog/creating-a-minecraft-mod-using-java-and-fabric"
     },
     {
       "source": "/z1-internship-experience",

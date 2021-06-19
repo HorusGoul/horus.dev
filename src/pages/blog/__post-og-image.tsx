@@ -3,7 +3,6 @@ import { PostFrontmatter, getPostCardDetails } from '@/utils/post';
 import { createGetServerSideProps } from '@/utils/ssr';
 import { Post } from '@prisma/client';
 import { ParsedUrlQuery } from 'querystring';
-import Image from 'next/image';
 import { RiTwitterFill } from 'react-icons/ri';
 import Head from 'next/head';
 

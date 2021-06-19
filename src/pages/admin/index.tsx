@@ -1,5 +1,5 @@
 import Auth from '@/components/auth';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/utils/useAuth';
 import { createGetServerSideProps } from '@/utils/ssr';

@@ -67,8 +67,7 @@ export const getServerSideProps = createGetServerSideProps<
 export default function PostPage({ frontmatter, post }: PostPageProps) {
   const title = `${post.title} | Horus Lugo `;
   const slug = post.slug;
-  const ogImage =
-    'https://horus.dev/api/og-image/blog/__post-og-image.png?id=' + post.id;
+  const ogImage = 'https://og.horus.dev/blog/__post-og-image.png?id=' + post.id;
   const description = frontmatter.description ?? '';
 
   return (

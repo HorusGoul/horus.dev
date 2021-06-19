@@ -97,7 +97,7 @@ export default function PostEditor({ post: initialPost }: PostEditorProps) {
         <div className="ml-auto flex gap-2 items-center">
           {/* eslint-disable-next-line react/jsx-no-target-blank */}
           <a
-            href={`/api/og-image/blog/__post-og-image.png?id=${post.id}`}
+            href={`https://og.horus.dev/blog/__post-og-image.png?id=${post.id}`}
             className="p-2 bg-gray-400 text-gray-800 rounded-full hover:opacity-90 active:opacity-70"
             target="_blank"
           >

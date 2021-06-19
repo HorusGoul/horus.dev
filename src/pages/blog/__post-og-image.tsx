@@ -120,12 +120,12 @@ export default function PostOgImage({ post, frontmatter }: PostPageProps) {
 
             <div className="flex items-center bg-white text-black p-4 pr-10 rounded-full">
               <div className="rounded-full overflow-hidden shadow-lg h-24 w-24 mr-6 ">
-                <Image
-                  width={96}
-                  height={96}
+                <img
                   src="/images/avatar/lg.jpg"
                   aria-hidden="true"
                   alt="My Avatar"
+                  width={96}
+                  height={96}
                 />
               </div>
 

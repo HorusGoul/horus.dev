@@ -54,8 +54,7 @@ export async function createFeed() {
       description: frontmatter.description ?? undefined,
       date: post.publishedAt ?? new Date(),
       author: [author],
-      image:
-        'https://horus.dev/api/og-image/blog/__post-og-image.png?id=' + post.id,
+      image: 'https://og.horus.dev/blog/__post-og-image.png?id=' + post.id,
     });
   }
 

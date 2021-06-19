@@ -1,8 +1,8 @@
-import { bundleMdx } from '@/mdx';
-import prisma from '@/prisma';
-import { apiAuthGuard } from '@/utils/auth-guard';
-import { PostFrontmatter } from '@/utils/post';
-import { createApiHandler } from '@/utils/ssr';
+import { bundleMdx } from '../src/mdx';
+import prisma from '../src/prisma';
+import { apiAuthGuard } from '../src/utils/auth-guard';
+import { PostFrontmatter } from '../src/utils/post';
+import { createApiHandler } from '../src/utils/ssr';
 import superjson from 'superjson';
 
 export default createApiHandler(async (req, res) => {

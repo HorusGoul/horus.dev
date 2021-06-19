@@ -1,6 +1,6 @@
-import { bundleMdx } from '@/mdx';
-import { apiAuthGuard } from '@/utils/auth-guard';
-import { createApiHandler } from '@/utils/ssr';
+import { bundleMdx } from '../src/mdx';
+import { apiAuthGuard } from '../src/utils/auth-guard';
+import { createApiHandler } from '../src/utils/ssr';
 
 export default createApiHandler(async (req, res) => {
   if (req.method !== 'POST') {

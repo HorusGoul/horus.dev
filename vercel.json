@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/api/og-image/(.*)",
+      "destination": "/api/og-image/"
+    }
+  ],
   "redirects": [
     {
       "source": "/minecraft-mod-java-fabric-guide",

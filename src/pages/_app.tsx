@@ -5,7 +5,8 @@ import NextNprogress from 'nextjs-progressbar';
 import { theme } from '@/../tailwind.config';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-  const includePlausible = !router.pathname.includes('/__');
+  const includePlausible =
+    !router.pathname.includes('/__') && !router.pathname.includes('/admin');
 
   return (
     <>

@@ -38,6 +38,7 @@
     "aws-sdk": "^2.927.0",
     "body-scroll-lock": "^3.1.5",
     "classnames": "^2.2.6",
+    "feed": "^4.2.2",
     "framer-motion": "2.6.13",
     "image-size": "^1.0.0",
     "mdx-bundler": "^4.0.1",

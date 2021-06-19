@@ -32,8 +32,8 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
   return { props: { posts }, revalidate: 60 };
 };
 
-const META_TITLE = `Blog | Horus Lugo`;
-const META_BIO = `Here's where you can find my latest publications about my projects, tutorials, and stuff from various topics, focusing on web development.`;
+export const META_TITLE = `Blog | Horus Lugo`;
+export const META_BIO = `Here's where you can find my latest publications about my projects, tutorials, and stuff from various topics, focusing on web development.`;
 
 export default function Blog({ posts }: BlogProps) {
   return (

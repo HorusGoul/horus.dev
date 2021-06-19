@@ -39,6 +39,24 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS Feed for horus.dev"
+          href="/rss"
+        />
+        <link
+          rel="alternate"
+          type="application/atom+xml"
+          title="Atom Feed for horus.dev"
+          href="/atom"
+        />
+        <link
+          rel="alternate"
+          type="application/json"
+          title="JSON Feed for horus.dev"
+          href="/json"
+        />
         {/* Plausible Analytics */}
         {includePlausible && (
           <script

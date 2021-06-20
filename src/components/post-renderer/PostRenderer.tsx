@@ -6,6 +6,12 @@ import { getPostCardDetails, PostFrontmatter } from '@/utils/post';
 import { Post } from '@prisma/client';
 import { MdAttachFile } from 'react-icons/md';
 
+declare global {
+  interface PlausibleEvents {
+    ['Share']: { post: string; type: string };
+  }
+}
+
 const components = {
   img: function CustomImage({
     src,
@@ -102,6 +108,14 @@ function PostRenderer({ code, frontmatter, post }: PostRendererProps) {
     }
   }
 
+  function createShareOnClick(type: string) {
+    return () => {
+      plausible('Share', {
+        props: { type, post: post.slug },
+      });
+    };
+  }
+
   function shareOrCopy() {
     const url = createShareLink('copy');
 
@@ -110,13 +124,22 @@ function PostRenderer({ code, frontmatter, post }: PostRendererProps) {
         url,
         title: post.title,
       });
+      plausible('Share', {
+        props: { type: 'native-share', post: post.slug },
+      });
     } else if ('clipboard' in navigator) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigator.clipboard.writeText(url);
       alert('URL Copied!');
+      plausible('Share', {
+        props: { type: 'copy-url', post: post.slug },
+      });
     } else {
       prompt('Copy from the text input', url);
+      plausible('Share', {
+        props: { type: 'copy-url-prompt', post: post.slug },
+      });
     }
   }
 
@@ -174,6 +197,7 @@ function PostRenderer({ code, frontmatter, post }: PostRendererProps) {
             <li key={site.type}>
               <a
                 href={createShareLink(site.type)}
+                onClick={createShareOnClick(site.type)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-block text-gray-800 font-bold p-1 bg-gray-200 rounded-md hover:bg-gray-300"

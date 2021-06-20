@@ -108,7 +108,7 @@ function PostRenderer({ code, frontmatter, post }: PostRendererProps) {
     if ('share' in navigator) {
       navigator.share({
         url,
-        title: `Join me in Card Battle Game!`,
+        title: post.title,
       });
     } else if ('clipboard' in navigator) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

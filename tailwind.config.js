@@ -148,6 +148,11 @@ module.exports = {
             'code::after': {
               content: '""',
             },
+            code: {
+              backgroundColor: '#edf2f7',
+              padding: '0.125rem 0.25rem',
+              borderRadius: '0.25rem',
+            },
             pre: {
               backgroundColor: '#011627',
             },

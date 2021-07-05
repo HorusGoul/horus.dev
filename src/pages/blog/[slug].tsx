@@ -1,16 +1,15 @@
 import { ParsedUrlQuery } from 'querystring';
 import PostRenderer from '@/components/post-renderer';
-import { getPostState, PostFrontmatter } from '@/utils/post';
+import { PostFrontmatter } from '@/utils/post';
 import Head from 'next/head';
 import prisma from '@/prisma';
-import { authGuard } from '@/utils/auth-guard';
-import { createGetServerSideProps, RedirectResult } from '@/utils/ssr';
 import MiniHeader from '@/components/mini-header';
 import SubpageContainer from '@/components/subpage-container';
 import { Post } from '.prisma/client';
 import Footer from '@/components/footer';
 import React from 'react';
 import Social from '@/components/social';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 interface PostPageProps {
   slug: string;
@@ -19,17 +18,17 @@ interface PostPageProps {
 }
 
 interface PostPageQueryParams extends ParsedUrlQuery {
-  slug: string;
+  id: string;
 }
 
-export const getServerSideProps = createGetServerSideProps<
+export const getStaticProps: GetStaticProps<
   PostPageProps,
   PostPageQueryParams
->(async (context) => {
-  const slug = context.params?.slug ?? '';
+> = async (context) => {
+  const id = context.params?.id;
 
   const post = await prisma.post.findFirst({
-    where: { slug },
+    where: { id },
     orderBy: { publishedAt: 'desc' },
   });
 
@@ -42,27 +41,36 @@ export const getServerSideProps = createGetServerSideProps<
     };
   }
 
-  const state = getPostState(post);
-
-  if (state !== 'published') {
-    await authGuard(context).catch(() => {
-      throw new RedirectResult({
-        destination: '/blog',
-        permanent: false,
-      });
-    });
-  }
-
   const frontmatter = post.frontmatter as PostFrontmatter;
 
   return {
     props: {
-      slug,
+      slug: post.slug,
       post,
       frontmatter,
     },
+    revalidate: 10,
   };
-});
+};
+
+export const getStaticPaths: GetStaticPaths<PostPageQueryParams> = async () => {
+  const posts = await prisma.post.findMany({
+    where: {
+      publishedAt: {
+        not: {
+          equals: null,
+          gt: new Date(),
+        },
+      },
+    },
+    orderBy: { publishedAt: 'desc' },
+  });
+
+  return {
+    paths: posts.map((post) => ({ params: { id: post.id } })),
+    fallback: false,
+  };
+};
 
 export default function PostPage({ frontmatter, post }: PostPageProps) {
   const title = `${post.title} | Horus Lugo `;

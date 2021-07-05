@@ -18,17 +18,17 @@ interface PostPageProps {
 }
 
 interface PostPageQueryParams extends ParsedUrlQuery {
-  id: string;
+  slug: string;
 }
 
 export const getStaticProps: GetStaticProps<
   PostPageProps,
   PostPageQueryParams
 > = async (context) => {
-  const id = context.params?.id;
+  const slug = context.params?.slug ?? '';
 
   const post = await prisma.post.findFirst({
-    where: { id },
+    where: { slug },
     orderBy: { publishedAt: 'desc' },
   });
 
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      slug: post.slug,
+      slug,
       post,
       frontmatter,
     },
@@ -67,7 +67,7 @@ export const getStaticPaths: GetStaticPaths<PostPageQueryParams> = async () => {
   });
 
   return {
-    paths: posts.map((post) => ({ params: { id: post.id } })),
+    paths: posts.map((post) => ({ params: { slug: post.slug } })),
     fallback: false,
   };
 };

@@ -68,7 +68,7 @@ export const getStaticPaths: GetStaticPaths<PostPageQueryParams> = async () => {
 
   return {
     paths: posts.map((post) => ({ params: { slug: post.slug } })),
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 

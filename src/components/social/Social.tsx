@@ -42,11 +42,11 @@ function Social({ className }: SocialProps) {
         linkedin.com/in/horusgoul
       </SocialItem>
       <SocialItem
-        href="https://www.youtube.com/HorusGoul"
+        href="https://www.youtube.com/HorusLugo"
         label="YouTube"
         icon={<FaYoutube />}
       >
-        youtube.com/HorusGoul
+        youtube.com/HorusLugo
       </SocialItem>
       <SocialItem
         href="https://twitch.tv/horusgoul"

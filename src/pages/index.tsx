@@ -171,12 +171,6 @@ export default function Home({ posts }: HomeProps) {
           sourceCodeHref="https://github.com/HorusGoul/atom-pwa"
           image="atom"
         />
-        <ProjectCard
-          title="Kiddle"
-          description="Platform built to empower interest-based communities. Planning on open sourcing it once its development resumes."
-          href="https://kiddle.xyz"
-          image="kiddle"
-        />
       </div>
 
       <SectionDivider reverse={true} />
